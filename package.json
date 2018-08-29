@@ -1,0 +1,19 @@
+{
+  "name": "personaldb",
+  "version": "1.0.0",
+  "description": "base de datos del personal",
+  "main": "App.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/N00BEST/personalDB.git"
+  },
+  "author": "N00BEST",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/N00BEST/personalDB/issues"
+  },
+  "homepage": "https://github.com/N00BEST/personalDB#readme"
+}

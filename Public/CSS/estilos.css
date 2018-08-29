@@ -1,0 +1,130 @@
+/* Fondos */
+.fondo-principal {
+	background-color: #283149 !important;
+}
+
+.fondo-secundario {
+	background-color:  #404b69 !important;
+}
+
+.fondo-claro {
+	background-color: #dbedf3 !important;
+}
+
+.fondo-alternativo {
+	background-color: #00818a !important;
+}
+
+.fondo-exito {
+	background-color: #4E9525!important;
+}
+
+.fondo-info {
+	background-color: #3f8cff !important;
+}
+
+.fondo-advertencia {
+	background-color: #e5c347 !important;
+}
+
+.fondo-peligro {
+	background-color: #ea5b4b !important;
+}
+
+/* Tipografía */
+
+.texto-secundario {
+	color:  #404b69 !important;
+}
+
+.texto-primario {
+	color: #283149 !important;
+}
+
+h1 small, h2 small, h3 small, h4 small, h5 small, h6 small {
+	font-size: 60%;
+	color: #404b69;
+}
+
+
+/* Componentes */
+.contenedor {
+	width: 90% !important;
+}
+
+.principal {
+	margin-top: 25px;
+}
+
+	/* Menú lateral */
+
+	.lateral {
+		width: 100%; 
+		border-right: solid 2px #00818a;
+	}
+
+	.lateral > ul > a:not(.activa) > li:not(.divider){
+		padding: 5%; 
+		border-left: solid 5px white; 
+		border-radius: -10 0 0 -10; 
+		color: #283149;
+		transition: 
+			border-left .55s ease-in-out,
+			border-radius .40s ease-in-out,
+			background-color .55s ease-in-out;
+	}
+
+	.lateral > ul > a:not(.activa) > li:hover:not(.divider) {
+		border-left: solid 5px #00818a;
+		background-color: #dbedf3;
+		border-radius: 30px 0 0 30px; 
+	}
+
+	.lateral > ul > a.activa > li {
+		cursor: context-menu;
+		color: #283149;
+		background-color: #dbedf3;
+		padding: 5%; 
+		border-left: solid 5px #00818a !important; 
+	}
+
+	.lateral > ul > a.activa > li:hover {
+		padding: 5%; 
+		border-left: solid 5px #00818a !important; 
+	}
+
+	/* Migajas */
+
+	.migajas > ul > li {
+		display: inline-block !important;
+		padding: 5px;
+		color: #00818a;
+		cursor: pointer;
+	}
+
+	.migajas > ul > li.flecha {
+		color: #333;
+		cursor: context-menu;
+	}
+
+	.migajas > ul > li.activa {
+		color: #283149;
+		cursor: context-menu;
+	}
+
+	/* Tarjetas */
+
+	.tarjeta {
+		border: solid 1px white;
+		background-color: #404b69;
+		color: white;
+		transition: background-color 0.45s ease-in-out,
+			boder 0.45s ease-in-out, 
+			color 0.45s ease-in-out;
+	}
+
+	.tarjeta:hover{
+		color: #283149;
+		background-color: white;
+		border: solid 1px #283149;
+	}
