@@ -41,13 +41,94 @@
 	color: #283149 !important;
 }
 
+.texto-alternativo {
+	color: #00818a;
+}
+
+.texto-claro {
+	color: #dbedf3;
+}
+
+.texto {
+	font-size: 20px !important;
+}
+
+.justify-align {
+	text-align: justify;
+}
+
 h1 small, h2 small, h3 small, h4 small, h5 small, h6 small {
 	font-size: 60%;
 	color: #404b69;
 }
 
+/* Propiedades */
+
+.mt0 { /* Margin-top */
+	margin-top: 0px !important;
+}
+
+.mr0 {
+	margin-right: 0px !important;
+}
+
+.mb0 {
+	margin-bottom: 0px !important;
+}
+
+.ml0 {
+	margin-left: 0px !important;
+}
+
+.m0 {
+	margin: 0px;
+}
+
+.pt0 { /* Padding-top */
+	padding-top: 0px !important;
+}
+
+.pr0 {
+	padding-right: 0px !important;
+}
+
+.pb0 {
+	padding-bottom: 0px !important;
+}
+
+.pl0 {
+	padding-left: 0px !important;
+}
+
+.p0 {
+	padding: 0px !important;
+}
+
+.borde-derecho {
+	border-right: solid 1px #00818a;
+}
+
+.borde-izquierdo {
+	border-left: solid 3px #00818a;
+}
+
+.borde-superior {
+	border-top: solid 1px #00818a;
+}
+
+.borde-inferior {
+	border-bottom: solid 1px #00818a;
+}
+
+.bordes {
+	border: solid 1px #00818a;
+}
 
 /* Componentes */
+#main-row {
+	margin-bottom: 0px !important;
+}
+
 .contenedor {
 	width: 90% !important;
 }
@@ -55,6 +136,24 @@ h1 small, h2 small, h3 small, h4 small, h5 small, h6 small {
 .principal {
 	margin-top: 25px;
 }
+
+.imagen-grande {
+	width: 100% !important;
+	border: solid 1px #ddd;
+}
+
+nav ul > li.active {
+	background-color: #404b69;
+}
+
+	/* Preview Image */
+	.preview {
+		height: 200px; 
+		width: 200px; 
+		background-color: #CCC;
+		align-self: center;
+	}
+
 
 	/* Menú lateral */
 
@@ -66,7 +165,7 @@ h1 small, h2 small, h3 small, h4 small, h5 small, h6 small {
 	.lateral > ul > a:not(.activa) > li:not(.divider){
 		padding: 5%; 
 		border-left: solid 5px white; 
-		border-radius: -10 0 0 -10; 
+		border-radius: 0 0 0 0; 
 		color: #283149;
 		transition: 
 			border-left .55s ease-in-out,
@@ -95,7 +194,7 @@ h1 small, h2 small, h3 small, h4 small, h5 small, h6 small {
 
 	/* Migajas */
 
-	.migajas > ul > li {
+	.migajas > ul  li {
 		display: inline-block !important;
 		padding: 5px;
 		color: #00818a;
@@ -103,7 +202,7 @@ h1 small, h2 small, h3 small, h4 small, h5 small, h6 small {
 	}
 
 	.migajas > ul > li.flecha {
-		color: #333;
+		color: #AAA;
 		cursor: context-menu;
 	}
 
