@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<link rel="stylesheet" href="/css/materialize.min.css">
+	<link rel="stylesheet" href="/CSS/estilos.css">
+	<!--<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">-->
+	<title>Unidad | DCPCEO</title>
+</head>
+<body>
+	<header id="header" class="navbar">
+		<nav class="fondo-principal">
+			<div class="nav-wrapper row">
+				<div class="col s2">
+					<div class="container"><a href="#" class="left brand-logo">DCPCEO<i class="large material-icons right">account_balance</i></a></div>
+				</div>
+				<div class="col s10">
+					<ul class="right hide-on-small-only">
+						<li><a href="#">Opción</a></li>
+						<li><a href="#">Opción</a></li>
+						<li><a href="#">Opción</a></li>
+					</ul>
+				</div>
+			</div>
+		</nav>
+	</header>
+
+	<main>
+		<div class="row" id="main-row">
+			<!-- Menú para dispositivos móviles -->
+			<div class="col s12 hide-on-med-and-up">
+				menú desplegable
+			</div>			
+
+			<!-- Drop down menu -->
+			<ul class="dropdown-content excluir-lateral" id="dropdown1">
+				<li><a href="#!">one</a></li>
+				<li><a href="#!">two</a></li>
+				<li class="divider"></li>
+				<li><a href="#!">three</a></li>
+			</ul>
+
+			<!-- Menú para dispositivos medianos y grandes -->
+			<div class="col m3 l2 show-on-med-and-up hide-on-small-only lateral">
+				<ul>
+					<li class="cabecera texto-secundario center-align"><h4>Menú</h4></li>
+					<a class="dropdown-trigger" data-target="dropdown1"><li>
+						Introduction<i class="material-icons right">arrow_drop_down</i>
+					</li></a>
+					<li class="divider"></li>
+					<a href="#structure"><li>Structure</li></a>
+					<li class="divider"></li>
+					<a href="#initialization"><li>Intialization</li></a>
+				</ul>
+			</div>
+
+			<!-- Sección principal de contenido -->
+			<div class="col s12 m9 l10 principal">
+				<div class="contenedor container">
+					<div class="row mb0 pb0">
+						<div class="col s12">
+							<!-- Título -->
+							<div class="col s12 pt0 mt0 pl0">
+								<h3 class="pb0 mb0 left-align texto-primario">Abreviación <small>Nombre de la unidad.</small></h3>
+							</div>
+							<div class="migajas mt0 pt0">
+								<ul class="mt0 pt0">
+									<li>Inicio</li>
+									<li class="flecha">&gt;</li>
+									<a href="/Unidades"><li>Unidades</li></a>
+									<li class="flecha">&gt;</li>
+									<li class="activa">Abreviación</li>
+								</ul>
+							</div>
+						</div>
+					</div>
+					<!-- Detalles de la unidad -->
+					<div class="row pt0 mt0 pb0 mb0">
+						<!-- Izquierda-->
+						<div class="col s12 l6 row pt0 mr0 mb0 borde-derecho">
+							<!-- Información General -->
+							<div class="col s12 mt0 pt0 justify-align detalles">
+								<h5 class="mt0 texto-primario">Información General:</h5>
+								<a class="texto texto-primario">Componente: </a><a class="texto texto-secundario antinegrita">Armada</a><br>
+								<a class="texto texto-primario">Dependencia: </a><a class="texto texto-secundario antinegrita">REDI</a><br>
+								<a class="texto texto-primario">Ubicación: </a><a class="texto texto-secundario antinegrita">Lorem ipsum dolor sit amet consectetur adipisicing elit. Inventore, numquam aut fuga quasi ipsum nostrum ipsa soluta, ducimus dignissimos, voluptatem doloremque. Et, itaque voluptates commodi quis ipsam quod omnis eaque.</a><br>
+							</div>
+							<!-- Información Laboral -->
+							<div class="col s12 mt0 pt0 justify-align detalles">
+								<h5 class="mt0 texto-primario">Información Laboral:</h5>
+								<a class="texto texto-primario">Personal: </a><br>
+								<a class="texto tabulado texto-primario">Civil: </a><a class="texto texto-secundario antinegrita">30 personas</a><br>
+								<a class="texto tabulado texto-primario">Militar: </a><a class="texto texto-secundario antinegrita">30 personas</a><br>
+								<a class="texto texto-primario">Cargos: </a>
+								<table class="resaltable">
+									<thead>
+										<tr class="enfasis">
+											<th rowspan="2" class="center-align">Puesto</th>
+											<th class="divisor"></th>
+											<th colspan="5" class="center-align enfasis">Plazas</th>
+										</tr>
+										<tr class="enfasis">
+											<th class="divisor"></th>
+											<th class="center-align">Disponibles</th>
+											<th class="divisor"></th>
+											<th class="center-align">Ocupadas</th>
+											<th class="divisor"></th>
+											<th class="center-align">Totales</th>
+										</tr>
+									</thead>
+									<tbody>
+										<tr>
+											<td>Cocinero</td>
+											<td class="divisor"></td>
+											<td class="center-align">5</td>
+											<td class="divisor"></td>
+											<td class="center-align">2</td>
+											<td class="divisor"></td>
+											<td class="center-align">7</td>
+										</tr>
+										<tr>
+											<td>Comandante</td>
+											<td class="divisor"></td>
+											<td class="center-align">0</td>
+											<td class="divisor"></td>
+											<td class="center-align">1</td>
+											<td class="divisor"></td>
+											<td class="center-align">1</td>
+										</tr>
+										<tr>
+											<td>Conductor</td>
+											<td class="divisor"></td>
+											<td class="center-align">2</td>
+											<td class="divisor"></td>
+											<td class="center-align">0</td>
+											<td class="divisor"></td>
+											<td class="center-align">2</td>
+										</tr>
+										<tr class="enfasis">
+											<td>Resumen</td>
+											<td class="divisor"></td>
+											<td class="center-align">7</td>
+											<td class="divisor"></td>
+											<td class="center-align">3</td>
+											<td class="divisor"></td>
+											<td class="center-align">10</td>
+										</tr>
+									</tbody>
+								</table><br>
+							</div>
+						</div>
+						<!-- Derecha -->
+						<div class="col s12 l6 row pt0 ml0">
+							<!-- Comandante de la unidad -->
+							<div class="col s12 mt0 pt0 justify-align detalles">
+								<h5 class="mt0 texto-primario">Comandante:</h5>
+								<div class="preview container"><img class="responsive-img" src="/IMG/default.png" alt=""></div>
+								<a class="texto texto-primario">Nombre: </a><a href="#" class="texto texto-secundario antinegrita">Fulanito Perengano</a><br>
+								<a class="texto texto-primario">Grado: </a><a class="texto texto-secundario antinegrita">Capitán de Navío</a><br>
+								<a class="texto texto-primario">Tiempo en el Cargo: </a><a class="texto texto-secundario antinegrita">49 años, 17 días.</a><br>
+							</div>
+							<!-- Subcomandante de la unidad -->
+							<div class="col s12 mt0 pt0 justify-align detalles">
+								<h5 class="mt0 texto-primario">Segundo Comandante:</h5>
+								<div class="preview container"><img class="responsive-img" src="/IMG/default.png" alt=""></div>
+								<a class="texto texto-primario">Nombre: </a><a href="#" class="texto texto-secundario antinegrita">Fulanito Perengano</a><br>
+								<a class="texto texto-primario">Grado: </a><a class="texto texto-secundario antinegrita">Capitán de Navío</a><br>
+								<a class="texto texto-primario">Tiempo en el Cargo: </a><a class="texto texto-secundario antinegrita">49 años, 17 días.</a><br>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</main>
+
+
+	<footer id="footer" class="page-footer fondo-secundario">
+		<div class="footer-copyright">
+			<div class="container center-align">
+				© 2014 Copyright Text
+			</div>
+		</div>
+	</footer>
+	<!-- Inicio de los scripts. -->
+	<script src="/js/jquery.min.js"></script>
+	<script src="/js/materialize.min.js"></script>
+	<script src="/JS/Main.js"></script>
+</body>
+</html>

@@ -6,7 +6,6 @@
 	<meta http-equiv="X-UA-Compatible" content="ie=edge">
 	<link rel="stylesheet" href="/css/materialize.min.css">
 	<link rel="stylesheet" href="/CSS/estilos.css">
-	<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 	<title>V-12345678 | DCPCEO</title>
 </head>
 <body>
@@ -14,7 +13,7 @@
 		<nav class="fondo-principal">
 			<div class="nav-wrapper row">
 				<div class="col s2">
-					<div class="container"><a href="#" class="left brand-logo">DCPCEO<i class="large material-icons right">account_balance</i></a></div>
+					<div class="container"><a href="#" class="left brand-logo">DCPCEO<i class="logo right"><img src="/ICONS/logo_large.png" class="responsive-img"></i></a></div>
 				</div>
 				<div class="col s10">
 					<ul class="right hide-on-small-only">
@@ -47,7 +46,7 @@
 				<ul>
 					<li class="cabecera texto-secundario center-align"><h4>Menú</h4></li>
 					<a class="dropdown-trigger" data-target="dropdown1"><li>
-						Introduction<i class="material-icons right">arrow_drop_down</i>
+						Introduction<i class="material-icons right"></i>
 					</li></a>
 					<li class="divider"></li>
 					<a href="#structure"><li>Structure</li></a>
@@ -61,7 +60,7 @@
 				<div class="contenedor container">
 					<div class="row mb0 pb0">
 						<div class="col s12">
-							<!-- Título del personal -->
+							<!-- Título -->
 							<div class="col s12 pt0 mt0 pl0">
 								<h3 class="pb0 mb0 left-align texto-primario">Nombre <small>- Jerarquía</small></h3>
 							</div>
@@ -69,7 +68,7 @@
 								<ul class="mt0 pt0">
 									<li>Inicio</li>
 									<li class="flecha">&gt;</li>
-									<li>Personal</li>
+									<a href="/Personal"><li>Personal</li></a>
 									<li class="flecha">&gt;</li>
 									<li class="activa">V-12345678</li>
 								</ul>
@@ -88,53 +87,54 @@
 								<h5 class="mt0 texto-primario">Datos Personales:</h5>
 							</div>
 							<!-- Datos Personales -->
-							<div class="col s12">
-								<a class="texto texto-primario">Nombres: </a><a class="texto texto-secundario">Fulanito Perengano</a><br>
-								<a class="texto texto-primario">Apellidos: </a><a class="texto texto-secundario">De Tal</a><br>
-								<a class="texto texto-primario">Sexo: </a><a class="texto texto-secundario">Masculino</a><br>
-								<a class="texto texto-primario">Cédula: </a><a class="texto texto-secundario">V-12345678</a><br>
-								<a class="texto texto-primario">Estado Civil: </a><a class="texto texto-secundario">Soltero</a><br>
-								<a class="texto texto-primario">Fecha de Nacimiento: </a><a class="texto texto-secundario">30 Ago 2018</a><br>
-								
-							</div>
-							<div class="col s12 divider fondo-alternativo" style="margin-top: 10px; margin-bottom: 10px;"></div>
-							<div class="col s12 pt0">
-								<h5 class="mt0 texto-primario">Datos de Contacto:</h5>
-							</div>
+								<div class="col s12">
+									<a class="texto texto-primario">Cédula: </a><a class="texto texto-secundario antinegrita">V-12345678</a><br>
+									<a class="texto texto-primario">Nombres: </a><a class="texto texto-secundario antinegrita">Fulanito Perengano</a><br>
+									<a class="texto texto-primario">Apellidos: </a><a class="texto texto-secundario antinegrita">De Tal</a><br>
+									<a class="texto texto-primario">Fecha de Nacimiento: </a><a class="texto texto-secundario antinegrita">30 Ago 2018</a><br>
+									<a class="texto texto-primario">Sexo: </a><a class="texto texto-secundario antinegrita">Masculino</a><br>
+									<a class="texto texto-primario">Estado Civil: </a><a class="texto texto-secundario antinegrita">Soltero</a><br>								
+								</div>
+								<div class="col s12 divider fondo-alternativo" style="margin-top: 10px; margin-bottom: 10px;"></div>
+								<div class="col s12 pt0">
+									<h5 class="mt0 texto-primario">Datos de Contacto:</h5>
+								</div>
 							<!-- Datos de Contacto -->
-							<div class="col s12">
-								<a class="texto texto-primario">Teléfono: </a><a class="texto texto-secundario">0414-123-45-67</a><br>
-								<a class="texto texto-primario">Correo Electrónico: </a><a class="texto texto-secundario">correo@ejemplo.com</a><br>
-								<a class="texto texto-primario">Dirección: </a><a class="texto texto-secundario">Avenida 1, Calle 7, Caracas, Venezuela.</a><br>
-								
-							</div>
-							<div class="col s12 divider fondo-alternativo" style="margin-top: 10px; margin-bottom: 10px;"></div>
-							<div class="col s12 pt0">
-								<h5 class="mt0 texto-primario">Datos Profesionales:</h5>
-							</div>
+								<div class="col s12">
+									<a class="texto texto-primario">Teléfono: </a><a class="texto texto-secundario antinegrita">0414-123-45-67</a><br>
+									<a class="texto texto-primario">Correo Electrónico: </a><a class="texto texto-secundario antinegrita">correo@ejemplo.com</a><br>
+									<a class="texto texto-primario">Dirección: </a><a class="texto texto-secundario antinegrita">Avenida 1, Calle 7, Caracas, Venezuela.</a><br>
+									
+								</div>
+								<div class="col s12 divider fondo-alternativo" style="margin-top: 10px; margin-bottom: 10px;"></div>
+								<div class="col s12 pt0">
+									<h5 class="mt0 texto-primario">Datos Profesionales:</h5>
+								</div>
 							<!-- Datos Profesionales -->
-							<div class="col s12">
-								<a class="texto texto-primario">Componente: </a><a class="texto texto-secundario">Armada Bolivariana</a><br>
-								<a class="texto texto-primario">Año de Graduación: </a><a class="texto texto-secundario">31 Feb 2018</a><br>
-								<a class="texto texto-primario">Jerarquía: </a><a class="texto texto-secundario">Álferes de Navío</a><br>
-								<a class="texto texto-primario">Último Ascenso: </a><a class="texto texto-secundario">31 Feb 2018</a><br>
-							</div>
-							<div class="col s12 divider fondo-alternativo" style="margin-top: 10px; margin-bottom: 10px;"></div>
-							<div class="col s12 pt0">
-								<h5 class="mt0 texto-primario">Datos Laborales:</h5>
-							</div>
+								<div class="col s12">
+									<a class="texto texto-primario">Componente: </a><a class="texto texto-secundario antinegrita">Armada Bolivariana</a><br>
+									<a class="texto texto-primario">Grado: </a><a class="texto texto-secundario antinegrita">Álferes de Navío</a><br>
+									<a class="texto texto-primario">Año de Graduación: </a><a class="texto texto-secundario antinegrita">31 Feb 2018</a><br>
+									<a class="texto texto-primario">Último Ascenso: </a><a class="texto texto-secundario antinegrita">31 Feb 2018</a><br>
+									<a class="texto texto-primario">Especialidad: </a><a class="texto texto-secundario antinegrita">Infantería de Marina</a><br>
+									<a class="texto texto-primario">Categoría: </a><a class="texto texto-secundario antinegrita">Comando</a><br>
+								</div>
+								<div class="col s12 divider fondo-alternativo" style="margin-top: 10px; margin-bottom: 10px;"></div>
+								<div class="col s12 pt0">
+									<h5 class="mt0 texto-primario">Datos Laborales:</h5>
+								</div>
 							<!-- Datos Laborales -->
-							<div class="col s12">
-								<a class="texto texto-primario">Unidad: </a><a class="texto texto-secundario">CEO</a><br>
-								<a class="texto texto-primario">Cargo: </a><a class="texto texto-secundario">Vicedirector de la Dirección Conjunta de Personal del CEO</a><br>
-								<a class="texto texto-primario">Toma del Cargo: </a><a class="texto texto-secundario">15 Oct 1970</a><br>
-								<a class="texto texto-primario">Presentación en la Unidad: </a><a class="texto texto-secundario">15 Oct 1970</a><br>
-								<a class="texto texto-primario">Tiempo en el Cargo: </a><a class="texto texto-secundario">47 años, 10 meses, 15 días.</a><br>
-								<a class="texto texto-primario">Tiempo en la Unidad: </a><a class="texto texto-secundario">47 años, 10 meses, 15 días.</a><br>
-								<a class="texto texto-primario">Cargo por Resolución: </a><a class="texto texto-secundario">Resolución</a><br>
-								<a class="texto texto-primario">Número de Resolución: </a><a class="texto texto-secundario">R2938</a><br>
-								<a class="texto texto-primario">Fecha de Resolución: </a><a class="texto texto-secundario">15 Oct 1970</a><br>
-							</div>
+								<div class="col s12">
+									<a class="texto texto-primario">Unidad: </a><a class="texto texto-secundario antinegrita">CEO</a><br>
+									<a class="texto texto-primario">Cargo que Desempeña: </a><a class="texto texto-secundario antinegrita">Vicedirector de la Dirección Conjunta de Personal del CEO</a><br>
+									<a class="texto texto-primario">Toma del Cargo: </a><a class="texto texto-secundario antinegrita">15 Oct 1970</a><br>
+									<a class="texto texto-primario">Presentación en la Unidad: </a><a class="texto texto-secundario antinegrita">15 Oct 1970</a><br>
+									<a class="texto texto-primario">Tiempo en el Cargo: </a><a class="texto texto-secundario antinegrita">47 años, 10 meses, 15 días.</a><br>
+									<a class="texto texto-primario">Tiempo en la Unidad: </a><a class="texto texto-secundario antinegrita">47 años, 10 meses, 15 días.</a><br>
+									<a class="texto texto-primario">Cargo por Resolución: </a><a class="texto texto-secundario antinegrita">Resolución</a><br>
+									<a class="texto texto-primario">Número de Resolución: </a><a class="texto texto-secundario antinegrita">R2938</a><br>
+									<a class="texto texto-primario">Fecha de Resolución: </a><a class="texto texto-secundario antinegrita">15 Oct 1970</a><br>
+								</div>
 						</div>
 					</div>
 					<!-- Observaciones generales -->
@@ -144,7 +144,7 @@
 						</div>
 						<!-- Observaciones generales -->
 						<div class="col s12">
-							<p class="texto texto-secundario justify-align">Mucho texto que puede ser editable para guardar la información que sea relevante y no se encuentre anexada por defecto en el control básico tal como la talla de la ropa, de los zapatos, si posee el carnet de la patria, chapa sanguínea y demás contenidos que sean de importancia para quien lleve la gestión de esta base de datos y su correcto uso para el manejo del sistema de forma eficiente.</p>
+							<p class="texto texto-secundario justify-align antinegrita">Mucho texto que puede ser editable para guardar la información que sea relevante y no se encuentre anexada por defecto en el control básico tal como la talla de la ropa, de los zapatos, si posee el carnet de la patria, chapa sanguínea y demás contenidos que sean de importancia para quien lleve la gestión de esta base de datos y su correcto uso para el manejo del sistema de forma eficiente.</p>
 						</div>
 					</div>
 				</div>
