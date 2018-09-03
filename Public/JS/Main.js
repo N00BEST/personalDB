@@ -1,9 +1,7 @@
 $(document).ready(()=>{
 	$('.dropdown-trigger').dropdown();
 	$('.lateral').height($('.principal').height() + $('header').height() + $('footer').height() + 100);
-	$(window).resize(()=>{
-		$('.lateral').height($('.principal').height() + $('header').height() + $('footer').height());
-	});
+	$(window).resize(calcularLateral);
 	$('select').formSelect();
 	$('.datepicker').datepicker({
 		format: 'dd mmm yyyy', 
@@ -21,4 +19,22 @@ $(document).ready(()=>{
 			formatSubmit: 'yyyy/mm/dd'
 		}
 	});
+	calcularColumnas();
 });
+
+function calcularColumnas() {
+	let columnaIzquierda = $('#columna-izquierda');
+	let columnaDerecha = $('#columna-derecha');
+
+	if(columnaDerecha.height() > columnaIzquierda.height()){
+		columnaIzquierda.removeClass('borde-derecho');
+		columnaDerecha.addClass('borde-izquierdo');
+	} else {
+		columnaDerecha.removeClass('borde-izquierdo');
+		columnaIzquierda.addClass('borde-derecho');
+	}
+}
+
+function calcularLateral() {
+	$('.lateral').height($('.principal').height() + $('header').height() + $('footer').height());
+}

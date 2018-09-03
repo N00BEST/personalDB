@@ -49,6 +49,10 @@
 	color: #dbedf3;
 }
 
+.texto-info {
+	color: #3f8cff;
+}
+
 .texto {
 	font-size: 20px !important;
 }
@@ -125,7 +129,7 @@ h1 small, h2 small, h3 small, h4 small, h5 small, h6 small {
 }
 
 .borde-superior {
-	border-top: solid 1px #00818a;
+	border-top: solid 2px #00818a;
 }
 
 .borde-inferior {
@@ -164,7 +168,7 @@ h1 small, h2 small, h3 small, h4 small, h5 small, h6 small {
 	color: #222 !important;
 }
 
-.boton-confirmar {
+.boton-confirmar:not(.boton-outline) {
 	background-color: #00818a ;
 	color: #dbedf3 ;
 	transition: background-color .25s ease-in-out;
@@ -172,6 +176,36 @@ h1 small, h2 small, h3 small, h4 small, h5 small, h6 small {
 
 .boton-confirmar:hover {
 	background-color: #00474c ;
+}
+
+.boton-outline.boton-info.btn-flat {
+	border: solid 1px #3f8cff;
+	color: #3f8cff;
+	transition: 
+		border .3s ease-in-out,
+		background-color .3s ease-in-out,
+		color .3s ease-in-out;
+}
+
+.boton-outline.boton-info.btn-flat:hover {
+	border: solid 1px white;
+	background-color: #3f8cff;
+	color: white;
+}
+
+.boton-outline.boton-confirmar.btn-flat {
+	border: solid 1px #00818a;
+	color: #00818a;
+	transition: 
+		border .3s ease-in-out,
+		background-color .3s ease-in-out,
+		color .3s ease-in-out;
+}
+
+.boton-outline.boton-confirmar.btn-flat:hover {
+	border: solid 1px white;
+	background-color: #00818a;
+	color: white;
 }
 
 .imagen-editar:hover {

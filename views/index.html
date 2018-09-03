@@ -7,7 +7,7 @@
 	<link rel="stylesheet" href="../Public/css/materialize.min.css">
 	<link rel="stylesheet" href="../Public/CSS/estilos.css">
 	<link rel="shortcut icon" href="../Public/ICONS/logo.png" type="image/x-icon">
-	<title>Registrar Nueva Unidad | DCPCEO</title>
+	<title>Registrar Nuevo Componente | DCPCEO</title>
 </head>
 <body>
 	<header id="header" class="navbar">
@@ -63,7 +63,7 @@
 						<div class="col s12">
 							<!-- Título -->
 							<div class="col s12 pt0 mt0 pl0">
-								<h3 class="pb0 mb0 left-align texto-primario">Registrar Unidad <small>Ingresar nueva unidad a la base de datos.</small></h3>
+								<h3 class="pb0 mb0 left-align texto-primario">Registrar Nuevo Componente <small>Ingresar nuevo componente a la base de datos.</small></h3>
 							</div>
 							<div class="migajas mt0 pt0">
 								<ul class="mt0 pt0">
@@ -71,7 +71,7 @@
 									<li class="flecha">&gt;</li>
 									<a href="/Registrar"><li>Registrar</li></a>
 									<li class="flecha">&gt;</li>
-									<li class="activa">Unidad</li>
+									<li class="activa">Componente</li>
 								</ul>
 							</div>
 						</div>
@@ -84,65 +84,31 @@
 								<div class="col input-field s12">
 									<h4 class="texto-primario">Información General:</h4>
 								</div>
-								<!-- Abreviatura -->
-								<div class="input-field col s12 l2 offset-l1">
-									<label for="abreviatura">Abreviatura</label>
-									<input type="text" id="abreviatura" name="abreviatura">
-								</div>
 								<!-- Nombre -->
-								<div class="input-field col s12 l6 offset-l1">
+								<div class="input-field col s12 l9 offset-l1">
 									<label for="nombres">Nombre</label>
 									<input type="text" id="nombre" name="nombre">
 								</div>
-								<!-- Componente -->
-								<div class="input-field col s12 l4 offset-l1">
-									<select id="componente" name="componente">
-										<option value="" disabled selected>Seleccionar...</option>
-										<option value="armada">Armada Bolivariana</option>
-										<option value="aviacion">Aviación Militar Bolivariana</option>
-										<option value="civil">Civil</option> 
-										<option value="ejercito">Ejército Bolivariano</option>
-										<option value="guardia">Guardia Nacional Bolivariana</option>
-										<option value="milicia">Milicia Bolivariana</option>
-									</select>
-									<label for="componente">Componente:</label>
-								</div>
-								<!-- Dependencia -->
-								<div class="input-field col s12 l4 offset-l1">
-									<select id="dependencia" name="dependencia">
-										<option value="" disabled selected>Seleccionar...</option>
-										<option value="ceo">CEO</option>
-										<option value="dc">Dirección Conjunta</option>
-										<option value="armada">REDI</option>
-										<option value="aviacion">ZODI</option>
-									</select>
-									<label for="dependencia">Dependencia:</label>
-								</div>
-								<!-- Ubicación -->
-								<div class="input-field col s12 l9 offset-l1">
-									<textarea name="ubicacion" id="ubicacion" class="materialize-textarea"></textarea>
-									<label for="ubicacion">Ubicación</label>
-								</div>
 							<!-- Fin de Información General -->
 
-							<!-- Cargos -->
+							<!-- Grados -->
 								<!-- Título de la sección -->
 								<div class="col input-field s12">
-									<h4 class="texto-primario">Cargos Presentes en la Unidad:</h4>
+									<h4 class="texto-primario">Grados del Componente:</h4>
 								</div>
-								<!-- Tabla de Cargos -->
+								<!-- Tabla de Grados -->
 								<div class="col input-field s12 l9 offset-l1">
 									<table class="striped">
 										<thead>
 											<tr class="enfasis">
-												<th style="width: 70%">Puesto</th>
+												<th style="width: 70%">Grado</th>
 												<th class="divisor"></th>
-												<th class="center-align">Plazas Totales</th>
+												<th>Jerarquía</th>
 												<th class="divisor"></th>
 												<th colspan="2" style="width: 10%;"></th>
 											</tr>
 										</thead>
-										<tbody id="tablaCargos">
+										<tbody id="tablaGrados">
 										</tbody>
 									</table>
 								</div>
@@ -161,33 +127,33 @@
 										</div>
 									</div>
 								</div>
-								<!-- Botón de Agregar Cargo y Modal -->
+								<!-- Botón de Agregar Grado y Modal -->
 								<div class="col input-field s12 l3 offset-l4">
-									<a href="#agregarCargo" class="waves-effect waves-light btn boton-confirmar modal-trigger">Agregar Cargo</a>
+									<a href="#agregarGrado" class="waves-effect waves-light btn boton-confirmar modal-trigger">Agregar Grado</a>
 
 									<!-- Cuerpo del Modal -->
-									<div class="modal modal-fixed-footer" id="agregarCargo">
+									<div class="modal modal-fixed-footer" id="agregarGrado">
 										<div class="modal-content">
-											<h4 class="texto-primario">Agregar Cargo a la Unidad</h4><br>
+											<h4 class="texto-primario">Agregar Grado al Componente</h4><br>
 											<div class="row">
 												<div class="input-field col s12 l10 offset-l1">
-													<select id="cargos" name="cargos">
+													<select id="grados" name="grados">
 														<option value="" disabled selected>Seleccionar...</option>
-														<option value="Cocinero">Cocinero</option>
-														<option value="Comandante">Comandante</option>
-														<option value="Conductor">Conductor</option>
+														<option value="Cocinero">Alferez de Navío</option>
+														<option value="Comandante">Capitán de Corbeta</option>
+														<option value="Conductor">Contraalmirante</option>
 													</select>
-													<label for="componente">Cargo:</label>
+													<label for="grados">Grado:</label>
 												</div>
 												<div class="input-field col s12 l10 offset-l1">
-													<input type="text" name="plazas" id="plazas">
-													<label for="plazas">Plazas</label>
+													<input type="text" name="jerarquia" id="jerarquia">
+													<label for="jerarquia">Jerarquía</label>
 												</div>
 											</div>
 										</div>
 										<div class="modal-footer">
 											<a class="modal-close waves-effect waves-red btn-flat boton-cancelar">Cancelar</a>
-											<a id='confirmarCargo' class="modal-close waves-effect waves-green btn-flat boton-confirmar disabled">Agregar</a>
+											<a id='confirmarGrado' class="modal-close waves-effect waves-green btn-flat boton-confirmar disabled">Agregar</a>
 										</div>
 									</div>
 								</div>
@@ -221,5 +187,6 @@
 	<script src="../Public/js/materialize.min.js"></script>
 	<script src="../Public/JS/Main.js"></script>
 	<script src="../Public/JS/nuevaUnidad.js"></script>
+	<script src="../Public/JS/animacionesTablas.js"></script>
 </body>
 </html>
