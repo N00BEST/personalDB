@@ -101,9 +101,9 @@
 									<table class="striped">
 										<thead>
 											<tr class="enfasis">
-												<th style="width: 70%">Grado</th>
+												<th style="width: 15%;">Jerarquía</th>
 												<th class="divisor"></th>
-												<th>Jerarquía</th>
+												<th style="width: 70%">Grado</th>
 												<th class="divisor"></th>
 												<th colspan="2" style="width: 10%;"></th>
 											</tr>
@@ -139,15 +139,18 @@
 												<div class="input-field col s12 l10 offset-l1">
 													<select id="grados" name="grados">
 														<option value="" disabled selected>Seleccionar...</option>
-														<option value="Cocinero">Alferez de Navío</option>
-														<option value="Comandante">Capitán de Corbeta</option>
-														<option value="Conductor">Contraalmirante</option>
+														<option value="Alferez de Navío">Alferez de Navío</option>
+														<option value="Capitán de Corbeta">Capitán de Corbeta</option>
+														<option value="Contraalmirante">Contraalmirante</option>
 													</select>
 													<label for="grados">Grado:</label>
 												</div>
 												<div class="input-field col s12 l10 offset-l1">
-													<input type="text" name="jerarquia" id="jerarquia">
-													<label for="jerarquia">Jerarquía</label>
+													<select id="jerarquia" name="jerarquia">
+														<option value="" disabled selected>Seleccionar...</option>
+														<option value="1">1</option>
+													</select>
+													<label for="jerarquia">Jerarquía:</label>
 												</div>
 											</div>
 										</div>
@@ -186,7 +189,7 @@
 	<script src="../Public/js/jquery.min.js"></script>
 	<script src="../Public/js/materialize.min.js"></script>
 	<script src="../Public/JS/Main.js"></script>
-	<script src="../Public/JS/nuevaUnidad.js"></script>
+	<script src="../Public/JS/nuevoComponente.js"></script>
 	<script src="../Public/JS/animacionesTablas.js"></script>
 </body>
 </html>
