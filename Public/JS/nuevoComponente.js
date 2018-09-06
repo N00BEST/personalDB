@@ -36,20 +36,23 @@ function actualizarBoton() {
 }
 
 function iniciarJerarquia() {
-	let tabla = $('#tablaGrados');
-	$('#jerarquia').empty();
-	let seleccionar = document.createElement('option');
-	seleccionar.innerText="Seleccionar...";
-	$(seleccionar).attr('disabled');
-	$('#jerarquia').append(seleccionar);
-	let hijos = tabla.children().length;
-	for(let i = 0; i <= hijos; i++){
-		let opt = document.createElement('option');
-		opt.value = i + 1;
-		opt.innerText = i + 1;
-		$('#jerarquia').append(opt);
+	if(!EDITANDO){
+		let tabla = $('#tablaGrados');
+		$('#jerarquia').empty();
+		let seleccionar = document.createElement('option');
+		seleccionar.innerText="Seleccionar...";
+		$(seleccionar).attr('disabled', 'disabled');
+		$(seleccionar).attr('selected', 'selected');
+		$('#jerarquia').append(seleccionar);
+		let hijos = tabla.children().length;
+		for(let i = 0; i <= hijos; i++){
+			let opt = document.createElement('option');
+			opt.value = i + 1;
+			opt.innerText = i + 1;
+			$('#jerarquia').append(opt);
+		}
+		$('#jerarquia').formSelect();
 	}
-	$('#jerarquia').formSelect();
 }
 
 function verificarGrado(evt){
@@ -82,6 +85,7 @@ function edicion(evt) {
 	let fila = $(padre).parent();
 	let grado = $(fila).children('#grado').text();
 	let jerarquia = $(fila).children('#orden').text();
+	console.log('Jerarquia: ' + jerarquia);
 	$('#grados').val(grado);
 	$('#grados').formSelect();
 	$('#jerarquia').val(jerarquia);
@@ -98,7 +102,9 @@ function eliminar(evt) {
 	$(fila).addClass('fondo-peligro');
 	setTimeout(()=>{
 		cerrar(fila).then(()=>{
-			calcularLateral();
+			actualizarTabla().then(()=>{
+				calcularLateral();
+			});
 		});
 	}, 400);
 }
@@ -150,26 +156,26 @@ function agregar(evt) {
 
 			$(tr).append(_jerarquia, divisor, _grado, divisor1, editar, borrar);
 
-			if(tabla.children().length === 0){
-				console.log('Agregando 0');
+			if(tabla.children().length === 0) {
 				tabla.append(tr);
 			} else {
-				if(tr.id === '1') {
-					console.log('Agregando 1');
+				if(parseInt(jerarquia) === 1) {
 					tabla.prepend(tr);
+				} else if(parseInt(jerarquia) === tabla.children().length + 1) {
+					tabla.append(tr);
 				} else {
-					console.log('Agregando N');
-					tabla.children('#' + tr.id - 1).after(tr);
+					tabla.children('#' + (parseInt(jerarquia) - 1)).after(tr);
 				}
 			}
+
 			actualizarTabla().then(()=>{
 				calcularLateral();
 			});
 		} else {
-			let cargo = $('#cargos').val();
-			let plazas = $('#plazas').val();
-			$(__FILA).children('#puesto').text(cargo);
-			$(__FILA).children('#totales').text(plazas);
+			let grado = $('#grados').val();
+			let jerarquia = $('#jerarquia').val();
+			$(__FILA).children('#grado').text(grado);
+			$(__FILA).children('#orden').text(jerarquia);
 		}
 	}
 }
@@ -183,5 +189,6 @@ function actualizarTabla(){
 			hijo.text(i + 1);
 			$(hijos[i]).attr('id', i+1);
 		}
+		resolve();
 	});
 }

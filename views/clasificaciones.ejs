@@ -7,7 +7,7 @@
 	<link rel="stylesheet" href="/css/materialize.min.css">
 	<link rel="stylesheet" href="/CSS/estilos.css">
 	<link rel="shortcut icon" href="/ICONS/logo.png" type="image/x-icon">
-	<title>Administrar Cargos | DCPCEO</title>
+	<title>Administrar Clasificación | DCPCEO</title>
 </head>
 <body>
 	<header id="header" class="navbar">
@@ -63,7 +63,7 @@
 						<div class="col s12">
 							<!-- Título -->
 							<div class="col s12 pt0 mt0 pl0">
-								<h3 class="pb0 mb0 left-align texto-primario">Cargos <small>Agregar cargos nuevos o modificar los existentes.</small></h3>
+								<h3 class="pb0 mb0 left-align texto-primario">Clasificación <small>Categorías en las que se clasifica el personal civil.</small></h3>
 							</div>
 							<div class="migajas mt0 pt0">
 								<ul class="mt0 pt0">
@@ -71,57 +71,53 @@
 									<li class="flecha">&gt;</li>
 									<a href="/Administrar"><li>Administrar</li></a>
 									<li class="flecha">&gt;</li>
-									<li class="activa">Cargos</li>
+									<li class="activa">Clasificaciones</li>
 								</ul>
 							</div>
 						</div>
 					</div>
-					<!-- Inicio del formulario -->
+					<!-- Clasificaciones -->
 					<div class="row pt0 mt0">
-						<!-- Cargos -->
-							<!-- Título de la sección -->
-							<div class="col input-field s12">
-								<h4 class="texto-primario">Lista de los cargos registrados:</h4>
-								<a href="#agregarCargo" class="right waves-effect waves-light btn boton-confirmar modal-trigger">Crear Nuevo Cargo</a>
-								
-								<!-- Cuerpo del Modal -->
-								<div class="modal modal-fixed-footer" id="agregarCargo">
-									<div class="modal-content">
-										<h4 class="texto-primario">Crear un cargo nuevo</h4><br>
-										<div class="row">
-											<div class="input-field col s12 l10 offset-l1">
-												<input type="text" name="nuevoCargo" id="nuevoCargo">
-												<label for="nuevoCargo">Nombre del Cargo</label>
-											</div>
+						<!-- Título de la sección -->
+						<div class="col input-field s12">
+							<h4 class="texto-primario">Lista de las clasificaciones registradas:</h4>
+							<a href="#agregarClasificacion" class="right waves-effect waves-light btn boton-confirmar modal-trigger">Crear Nueva Clasificación</a>
+							
+							<!-- Cuerpo del Modal -->
+							<div class="modal modal-fixed-footer" id="agregarClasificacion">
+								<div class="modal-content">
+									<h4 class="texto-primario">Crear una clasificación nueva</h4><br>
+									<div class="row">
+										<div class="input-field col s12 l10 offset-l1">
+											<input type="text" name="nuevaClasificacion" id="nuevaClasificacion">
+											<label for="nuevaClasificacion">Nombre del Estado</label>
 										</div>
 									</div>
-									<div class="modal-footer">
-										<a class="modal-close waves-effect waves-red btn-flat boton-cancelar">Cancelar</a>
-										<a id='confirmarCargo' class="modal-close waves-effect waves-green btn-flat boton-confirmar disabled">Agregar</a>
-									</div>
+								</div>
+								<div class="modal-footer">
+									<a class="modal-close waves-effect waves-red btn-flat boton-cancelar">Cancelar</a>
+									<a id='confirmarClasificacion' class="modal-close waves-effect waves-green btn-flat boton-confirmar disabled">Agregar</a>
 								</div>
 							</div>
-							<!-- Tabla de Cargos -->
-							<div class="col input-field s12 l9 offset-l1">
-								<table class="striped">
-									<thead>
-										<tr class="enfasis">
-											<th class="center-align" style="width: 30%">Cargo</th>
-											<th class="divisor"></th>
-											<th >Personal Activo</th>
-											<th class="divisor"></th>
-											<th >Personal Histórico</th>
-											<th class="divisor"></th>
-											<th >Fecha de Creación</th>
-											<th class="divisor"></th>
-											<th colspan="2" style="width: 10%;"></th>
-										</tr>
-									</thead>
-									<tbody id="tablaCargos">
-									</tbody>
-								</table>
-							</div>
-						<!-- Fin de Cargos -->
+						</div>
+						<!-- Tabla de Clasificaciones -->
+						<div class="col input-field s12">
+							<table class="striped">
+								<thead>
+									<tr class="enfasis">
+										<th style="width: 50%">Clasificación</th>
+										<th class="divisor"></th>
+										<th class="center-align">Personal</th>
+										<th class="divisor"></th>
+										<th class="center-align">Fecha de Creación</th>
+										<th class="divisor"></th>
+										<th colspan="2" style="width: 10%;"></th>
+									</tr>
+								</thead>
+								<tbody id="tablaClasificaciones">
+								</tbody>
+							</table>
+						</div>
 					</div>
 				</div>
 			</div>
@@ -140,6 +136,7 @@
 	<script src="/js/jquery.min.js"></script>
 	<script src="/js/materialize.min.js"></script>
 	<script src="/JS/Main.js"></script>
+	<script src="/JS/nuevoComponente.js"></script>
 	<script src="/JS/animacionesTablas.js"></script>
 </body>
 </html>

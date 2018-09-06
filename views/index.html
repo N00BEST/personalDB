@@ -7,7 +7,7 @@
 	<link rel="stylesheet" href="../Public/css/materialize.min.css">
 	<link rel="stylesheet" href="../Public/CSS/estilos.css">
 	<link rel="shortcut icon" href="../Public/ICONS/logo.png" type="image/x-icon">
-	<title>Registrar Nuevo Componente | DCPCEO</title>
+	<title>Administrar Clasificación | DCPCEO</title>
 </head>
 <body>
 	<header id="header" class="navbar">
@@ -63,114 +63,61 @@
 						<div class="col s12">
 							<!-- Título -->
 							<div class="col s12 pt0 mt0 pl0">
-								<h3 class="pb0 mb0 left-align texto-primario">Registrar Nuevo Componente <small>Ingresar nuevo componente a la base de datos.</small></h3>
+								<h3 class="pb0 mb0 left-align texto-primario">Clasificación <small>Categorías en las que se clasifica el personal civil.</small></h3>
 							</div>
 							<div class="migajas mt0 pt0">
 								<ul class="mt0 pt0">
 									<li>Inicio</li>
 									<li class="flecha">&gt;</li>
-									<a href="/Registrar"><li>Registrar</li></a>
+									<a href="/Administrar"><li>Administrar</li></a>
 									<li class="flecha">&gt;</li>
-									<li class="activa">Componente</li>
+									<li class="activa">Clasificaciones</li>
 								</ul>
 							</div>
 						</div>
 					</div>
-					<!-- Inicio del formulario -->
+					<!-- Clasificaciones -->
 					<div class="row pt0 mt0">
-						<form action="" method="POST">
-							<!-- Información General -->
-								<!-- Título de la sección -->
-								<div class="col input-field s12">
-									<h4 class="texto-primario">Información General:</h4>
-								</div>
-								<!-- Nombre -->
-								<div class="input-field col s12 l9 offset-l1">
-									<label for="nombres">Nombre</label>
-									<input type="text" id="nombre" name="nombre">
-								</div>
-							<!-- Fin de Información General -->
-
-							<!-- Grados -->
-								<!-- Título de la sección -->
-								<div class="col input-field s12">
-									<h4 class="texto-primario">Grados del Componente:</h4>
-								</div>
-								<!-- Tabla de Grados -->
-								<div class="col input-field s12 l9 offset-l1">
-									<table class="striped">
-										<thead>
-											<tr class="enfasis">
-												<th style="width: 15%;">Jerarquía</th>
-												<th class="divisor"></th>
-												<th style="width: 70%">Grado</th>
-												<th class="divisor"></th>
-												<th colspan="2" style="width: 10%;"></th>
-											</tr>
-										</thead>
-										<tbody id="tablaGrados">
-										</tbody>
-									</table>
-								</div>
-								<!-- Botón para limpiar tabla y modal -->
-								<div class="col input-field s12 l3 offset-l1">
-									<a href="#limpiarTabla" class="waves-effect waves-light btn white grey-text text-darken-1 boton-cancelar modal-trigger">Vaciar Tabla</a>
-
-									<div class="modal" id="limpiarTabla">
-										<div class="modal-content">
-											<h4 class="center-align texto-primario">Borrar todo</h4>
-											<p class="texto texto-secundario center-align">¿Seguro que desea quitar todo el contenido de la tabla?</p>
-										</div>
-										<div class="modal-footer">
-											<a class="modal-close waves-effect waves-red btn-flat boton-cancelar left">No</a>
-											<a id="vaciarTabla" class="modal-close waves-effect waves-green btn-flat boton-confirmar">Sí</a>
-										</div>
-									</div>
-								</div>
-								<!-- Botón de Agregar Grado y Modal -->
-								<div class="col input-field s12 l3 offset-l4">
-									<a href="#agregarGrado" class="waves-effect waves-light btn boton-confirmar modal-trigger">Agregar Grado</a>
-
-									<!-- Cuerpo del Modal -->
-									<div class="modal modal-fixed-footer" id="agregarGrado">
-										<div class="modal-content">
-											<h4 class="texto-primario">Agregar Grado al Componente</h4><br>
-											<div class="row">
-												<div class="input-field col s12 l10 offset-l1">
-													<select id="grados" name="grados">
-														<option value="" disabled selected>Seleccionar...</option>
-														<option value="Alferez de Navío">Alferez de Navío</option>
-														<option value="Capitán de Corbeta">Capitán de Corbeta</option>
-														<option value="Contraalmirante">Contraalmirante</option>
-													</select>
-													<label for="grados">Grado:</label>
-												</div>
-												<div class="input-field col s12 l10 offset-l1">
-													<select id="jerarquia" name="jerarquia">
-														<option value="" disabled selected>Seleccionar...</option>
-														<option value="1">1</option>
-													</select>
-													<label for="jerarquia">Jerarquía:</label>
-												</div>
-											</div>
-										</div>
-										<div class="modal-footer">
-											<a class="modal-close waves-effect waves-red btn-flat boton-cancelar">Cancelar</a>
-											<a id='confirmarGrado' class="modal-close waves-effect waves-green btn-flat boton-confirmar disabled">Agregar</a>
-										</div>
-									</div>
-								</div>
-							<!-- Fin de Cargos -->
+						<!-- Título de la sección -->
+						<div class="col input-field s12">
+							<h4 class="texto-primario">Lista de las clasificaciones registradas:</h4>
+							<a href="#agregarClasificacion" class="right waves-effect waves-light btn boton-confirmar modal-trigger">Crear Nueva Clasificación</a>
 							
-							<div class="col s12"><br><br><br></div>
-
-							<!-- Fin del formulario -->
-							<div class="col s12 divider"></div><br><br><br>
-							<!-- Botón de registrar -->
-							<div class="col s12 l3 offset-l9" style="padding-top: 15px;">
-								<button class="btn boton-confirmar">Registrar</button>
+							<!-- Cuerpo del Modal -->
+							<div class="modal modal-fixed-footer" id="agregarClasificacion">
+								<div class="modal-content">
+									<h4 class="texto-primario">Crear una clasificación nueva</h4><br>
+									<div class="row">
+										<div class="input-field col s12 l10 offset-l1">
+											<input type="text" name="nuevaClasificacion" id="nuevaClasificacion">
+											<label for="nuevaClasificacion">Nombre del Estado</label>
+										</div>
+									</div>
+								</div>
+								<div class="modal-footer">
+									<a class="modal-close waves-effect waves-red btn-flat boton-cancelar">Cancelar</a>
+									<a id='confirmarClasificacion' class="modal-close waves-effect waves-green btn-flat boton-confirmar disabled">Agregar</a>
+								</div>
 							</div>
-						</form>
+						</div>
+						<!-- Tabla de Clasificaciones -->
+						<div class="col input-field s12">
+							<table class="striped">
+								<thead>
+									<tr class="enfasis">
+										<th style="width: 50%">Clasificación</th>
+										<th class="divisor"></th>
+										<th class="center-align">Personal</th>
+										<th class="divisor"></th>
+										<th class="center-align">Fecha de Creación</th>
+										<th class="divisor"></th>
+										<th colspan="2" style="width: 10%;"></th>
+									</tr>
+								</thead>
+								<tbody id="tablaClasificaciones">
+								</tbody>
+							</table>
+						</div>
 					</div>
 				</div>
 			</div>
