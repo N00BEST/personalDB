@@ -22,7 +22,17 @@ module.exports.postGrado = (req, res)=> {
 			//En arrego[0] la fila, en arreglo[1] si fue creado o no.
 			if(arreglo[1]){
 				//En caso de haber sido creado
-				res.sendStatus(201);
+				let resultado = {
+					ID: arreglo[0].ID,
+					nombre: arreglo[0].nombre,
+					activo: 0,
+					historico: 0,
+					creacion: arreglo[0].createdAt
+				}
+				res.statusCode = 201;
+				res.statusMessage = 'Created';
+				res.content = 'json';
+				res.send(resultado);
 			} else {
 				//En caso de que ya existiera
 				res.sendStatus(409);
@@ -145,7 +155,17 @@ module.exports.postEstado = (req, res)=> {
 			//En arrego[0] la fila, en arreglo[1] si fue creado o no.
 			if(arreglo[1]){
 				//En caso de haber sido creado
-				res.sendStatus(201);
+				let resultado = {
+					ID: arreglo[0].ID,
+					nombre: arreglo[0].nombre,
+					activo: 0,
+					historico: 0,
+					creacion: arreglo[0].createdAt
+				}
+				res.statusCode = 201;
+				res.statusMessage = 'Created';
+				res.content = 'json';
+				res.send(resultado);
 			} else {
 				//En caso de que ya existiera
 				res.sendStatus(409);
@@ -268,7 +288,17 @@ module.exports.postCargo = (req, res)=> {
 			//En arrego[0] la fila, en arreglo[1] si fue creado o no.
 			if(arreglo[1]){
 				//En caso de haber sido creado
-				res.sendStatus(201);
+				let resultado = {
+					ID: arreglo[0].ID,
+					nombre: arreglo[0].nombre,
+					activo: 0,
+					historico: 0,
+					creacion: arreglo[0].createdAt
+				}
+				res.statusCode = 201;
+				res.statusMessage = 'Created';
+				res.content = 'json';
+				res.send(resultado);
 			} else {
 				//En caso de que ya existiera
 				res.sendStatus(409);
@@ -391,7 +421,17 @@ module.exports.postClasificacion = (req, res)=> {
 			//En arrego[0] la fila, en arreglo[1] si fue creado o no.
 			if(arreglo[1]){
 				//En caso de haber sido creado
-				res.sendStatus(201);
+				let resultado = {
+					ID: arreglo[0].ID,
+					nombre: arreglo[0].nombre,
+					activo: 0,
+					historico: 0,
+					creacion: arreglo[0].createdAt
+				}
+				res.statusCode = 201;
+				res.statusMessage = 'Created';
+				res.content = 'json';
+				res.send(resultado);
 			} else {
 				//En caso de que ya existiera
 				res.sendStatus(409);

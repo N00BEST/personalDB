@@ -34,6 +34,7 @@ function agregarCargo(evt){
 		let tabla = $('#tablaCargos');
 		$.post('/api/cargo', { nombre: nombre }).then((cargo)=>{
 			//Cargo agregado a la base de datos
+			console.log(cargo);
 			let fila = crearFila(5);
 			$(fila).children('#1').text(cargo.nombre);
 			$(fila).children('#2').text(cargo.activo);
