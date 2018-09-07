@@ -57,3 +57,24 @@ function cerrar(fila, valores) {
 		}
 	});
 }
+
+function crearFila(columnas) {
+	if(isNaN(columnas)) {
+		throw new Error('Columnas debe ser un número');
+	} else {
+		columnas = parseInt(columnas);
+		let fila = document.createElement('tr');
+		for(let i = 0; i < columnas; i++){
+			let columna = document.createElement('td');
+			let divisor = document.createElement('td');
+			divisor.className = 'divisor';
+			columna.id = i + 1;
+
+			$(fila).append(columna, divisor);
+		}
+
+		$(fila).children().last().remove();
+
+		return fila;
+	}
+}
