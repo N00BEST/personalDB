@@ -58,6 +58,18 @@ function cerrar(fila, valores) {
 	});
 }
 
+function abrir(tabla, fila, fondo, slow) {
+	setTimeout(()=>{
+		tabla.prepend(fila);
+		$(fila).addClass(fondo);
+		calcularLateral();
+		setTimeout(()=>{
+			$(fila).addClass('animar ' + (slow ? 'slow' : ''));
+			$(fila).removeClass(fondo);
+		}, 500);
+	}, 500);
+}
+
 function crearFila(columnas) {
 	if(isNaN(columnas)) {
 		throw new Error('Columnas debe ser un número');

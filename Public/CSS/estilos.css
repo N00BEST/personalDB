@@ -53,6 +53,10 @@
 	color: #3f8cff;
 }
 
+.texto-peligro {
+	color: #ea5b4b;
+}
+
 .texto {
 	font-size: 20px !important;
 }

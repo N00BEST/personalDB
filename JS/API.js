@@ -62,6 +62,8 @@ module.exports.getGrados = (req, res)=>{
 			let fila = {
 				ID: filas[i].ID,
 				nombre: filas[i].nombre, 
+				activo: 'No Implementado',
+				historico: 'No Implementado',
 				creacion: filas[i].createdAt
 			}
 			resultado.push(fila);
@@ -272,7 +274,7 @@ module.exports.postCargo = (req, res)=> {
 	//Obtener nombre a registrar
 	let nombre = req.body.nombre; 
 	//Si no definen nombre, enviar error 400
-	if(typeof nombre === 'undefined') {
+	if(typeof nombre === 'undefined' || nombre.length === 0) {
 		res.sendStatus(400);
 	} else {
 		nombre = nombre.trim();
@@ -328,6 +330,8 @@ module.exports.getCargos = (req, res)=>{
 			let fila = {
 				ID: filas[i].ID,
 				nombre: filas[i].nombre, 
+				activo: 'No Implementado',
+				historico: 'No Implementado',
 				creacion: filas[i].createdAt
 			}
 			resultado.push(fila);
@@ -368,15 +372,19 @@ module.exports.getCargo = (req, res)=>{
 };
 
 module.exports.putCargo = (req, res)=>{
-	let nombre = req.query.nombre;
-	let nuevo = req.query.nuevo;
-	if(typeof nombre === 'undefined' || typeof nuevo === 'undefined'){
+	console.log('Nueva solicitud por aquí');
+	let nombre = req.body.nombre;
+	let nuevo = req.body.nuevo;
+	let ID = req.body.ID;
+	console.log(nombre + ' ' + nuevo + ' ' + ID);
+	if(typeof nombre === 'undefined' || typeof nuevo === 'undefined' || typeof ID === 'undefined' || isNaN(ID) || ID.indexOf('.') !== -1){
 		res.sendStatus(400);
 	} else {
 		nombre = nombre.trim();
 		nuevo = nuevo.trim();
 		DB.Cargos.findOne({
 			where: {
+				ID: ID,
 				nombre: nombre.toLowerCase()
 			}
 		}).then((cargo)=>{
@@ -384,7 +392,14 @@ module.exports.putCargo = (req, res)=>{
 				cargo.update({
 					nombre: nuevo.toLowerCase()
 				}).then((_cargo)=>{
-					res.sendStatus(200);
+					let resultado = {
+						ID: _cargo.ID,
+						nombre: _cargo.nombre,
+						activo: 'No Implementado',
+						historico: 'No Implementado',
+						creacion: _cargo.createdAt
+					}
+					res.send(resultado);
 				}).catch((err)=>{
 					console.log(`[ ERROR ] Ocurrió un error al intentar modificar un cargo. ${err.message} `);
 					res.sendStatus(500);
