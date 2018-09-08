@@ -237,8 +237,8 @@ module.exports.getEstado = (req, res)=>{
 };
 
 module.exports.putEstado = (req, res)=>{
-	let nombre = req.query.nombre;
-	let nuevo = req.query.nuevo;
+	let nombre = req.body.nombre;
+	let nuevo = req.body.nuevo;
 	if(typeof nombre === 'undefined' || typeof nuevo === 'undefined'){
 		res.sendStatus(400);
 	} else {
@@ -253,7 +253,13 @@ module.exports.putEstado = (req, res)=>{
 				estado.update({
 					nombre: nuevo.toLowerCase()
 				}).then((_estado)=>{
-					res.sendStatus(200);
+					let resultado = {
+						ID: _estado.ID,
+						nombre: _estado.nombre,
+						personal: 'No Implementado',
+						creacion: _estado.createdAt
+					}
+					res.send(resultado);
 				}).catch((err)=>{
 					console.log(`[ ERROR ] Ocurrió un error al intentar modificar un estado. ${err.message} `);
 					res.sendStatus(500);

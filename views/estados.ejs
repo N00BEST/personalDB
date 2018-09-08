@@ -6,6 +6,7 @@
 	<meta http-equiv="X-UA-Compatible" content="ie=edge">
 	<link rel="stylesheet" href="/css/materialize.min.css">
 	<link rel="stylesheet" href="/CSS/estilos.css">
+	<link rel="stylesheet" href="/CSS/animate.css">
 	<link rel="shortcut icon" href="/ICONS/logo.png" type="image/x-icon">
 	<title>Administrar Estados | DCPCEO</title>
 </head>
@@ -86,11 +87,13 @@
 							<!-- Cuerpo del Modal -->
 							<div class="modal modal-fixed-footer" id="agregarEstado">
 								<div class="modal-content">
-									<h4 class="texto-primario">Crear un estado nuevo</h4><br>
+									<h4 id="tituloModal" class="texto-primario">Crear un estado nuevo</h4><br>
 									<div class="row">
 										<div class="input-field col s12 l10 offset-l1">
 											<input type="text" name="nuevoEstado" id="nuevoEstado">
-											<label for="nuevoEstado">Nombre del Estado</label>
+											<label id="nuevoEstadoLabel" for="nuevoEstado">Nombre del Estado</label>
+										</div>
+										<div class="col s12 l10 offset-l1 texto-peligro" id="mensajeError">
 										</div>
 									</div>
 								</div>
@@ -111,7 +114,7 @@
 										<th class="divisor"></th>
 										<th class="center-align">Fecha de Creación</th>
 										<th class="divisor"></th>
-										<th colspan="2" style="width: 10%;"></th>
+										<th class="center-align"style="width: 10%;">Editar</th>
 									</tr>
 								</thead>
 								<tbody id="tablaEstados">
@@ -136,7 +139,8 @@
 	<script src="/js/jquery.min.js"></script>
 	<script src="/js/materialize.min.js"></script>
 	<script src="/JS/Main.js"></script>
-	<script src="/JS/nuevoComponente.js"></script>
+	<script src="/JS/utilidades.js"></script>
 	<script src="/JS/animacionesTablas.js"></script>
+	<script src="/JS/adminEstados.js"></script>
 </body>
 </html>

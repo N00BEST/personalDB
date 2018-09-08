@@ -59,3 +59,22 @@ function parseDate(fecha) {
 		return resultado;
 	}
 }
+
+function barraProgreso(activar){
+	//Desplegar u ocultar la barra de progreso.
+	let barra = $('#barraProgreso');
+	//Quitar la barra
+	barra.empty();
+	if(activar){
+		//Si se requiere activa, se instancia
+		let progreso = document.createElement('div');
+		let indeterminado = document.createElement('div');
+
+		progreso.className = 'progress';
+		indeterminado.className = 'indeterminate';
+
+		$(progreso).append(indeterminado);
+		//Se despliega la barra
+		barra.append(progreso);
+	}
+}

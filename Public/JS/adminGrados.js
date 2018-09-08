@@ -3,33 +3,33 @@ $(document).ready(()=>{
 		onCloseEnd: limpiarModal,
 		onOpenStart: desplegarTitulo
 	});
-	$('#confirmarCargo').click(agregarCargo);
-	$('#nuevoCargo').keyup(validarCargo);
+	$('#confirmarGrado').click(agregarGrado);
+	$('#nuevoGrado').keyup(validarGrado);
 	cargarTabla();
 });
 
 var EDITANDO = 0;
 var __NOMBRE = false;
 var __FILA = undefined;
-var __CARGO = undefined;
+var __GRADO = undefined;
 
 function desplegarTitulo() {
 	//Desplegar el título del modal según lo que se vaya a realizar
 	if(EDITANDO){
 		//Si se va a editar una fila
-		$('#tituloModal').text('Modificar un cargo existente');
+		$('#tituloModal').text('Modificar un grado existente');
 	} else {
 		//Si se va a crear una fila nueva
-		$('#tituloModal').text('Crear un cargo nuevo');
+		$('#tituloModal').text('Crear un grado nuevo');
 	}
 }
 
-function validarCargo(evt){
-	let nombre = $('#nuevoCargo').val().trim();
+function validarGrado(evt){
+	let nombre = $('#nuevoGrado').val().trim();
 	let error = $('#mensajeError');
 	if(nombre.length > 0) {
-		$.get('/api/cargo?nombre=' + nombre).then((cargo)=>{
-			error.text('Ya existe un cargo registrado con ese nombre.');
+		$.get('/api/grado?nombre=' + nombre).then((grado)=>{
+			error.text('Ya existe un grado registrado con ese nombre.');
 			if(EDITANDO === 1) {
 				EDITANDO++;
 				error.text('');
@@ -47,12 +47,12 @@ function validarCargo(evt){
 		actualizarBoton();
 	}
 	if(typeof evt !== 'undefined' && evt.keyCode === 13) {
-		agregarCargo();
+		agregarGrado();
 	}
 }
 
 function actualizarBoton() {
-	let boton = $('#confirmarCargo');
+	let boton = $('#confirmarGrado');
 	if(__NOMBRE){
 		boton.removeClass('disabled');
 	} else {
@@ -60,41 +60,40 @@ function actualizarBoton() {
 	}
 }
 
-function agregarCargo(){
+function agregarGrado(){
 	//Desplegar la barra de progreso
 	barraProgreso(true);
 	//Iniciar validación de los campos inscritos
-	validarCargo();
+	validarGrado();
 	//Si el nombre es válido
 	if(__NOMBRE){
 		//Extraer datos generales a usar
-		let nombre = $('#nuevoCargo').val().trim();
-		let tabla = $('#tablaCargos');
-		let modal = M.Modal.getInstance($('#agregarCargo'));
+		let nombre = $('#nuevoGrado').val().trim();
+		let tabla = $('#tablaGrados');
+		let modal = M.Modal.getInstance($('#agregarGrado'));
 		let error = $('#mensajeError');
 		if(EDITANDO){
 			//Si se está editando una fila existente
 			//Enviar solicitud tipo PUT al servidor
 			$.ajax({
-				url: '/api/cargo',
+				url: '/api/grado',
 				type: 'PUT', 
 				data: {
 					ID: __FILA.attr('id'),
-					nombre: __CARGO,
+					nombre: __GRADO,
 					nuevo: nombre
 				}, 
-				success: (cargo)=>{
+				success: (grado)=>{
 					//Al recibir respuesta, extraer datos de interés.
-					let division = cargo.creacion.indexOf('T');
-					let fecha = parseDate(cargo.creacion.substr(0, division));
+					let division = grado.creacion.indexOf('T');
+					let fecha = parseDate(grado.creacion.substr(0, division));
 					let fila = __FILA;
 
 					//Actualizar la fila
-					fila.attr('id', cargo.ID);
-					fila.children('#1').text(cargo.nombre);
-					fila.children('#2').text(cargo.activo);
-					fila.children('#3').text(cargo.historico);
-					fila.children('#4').text(fecha);
+					fila.attr('id', grado.ID);
+					fila.children('#1').text(grado.nombre);
+					fila.children('#2').text(grado.personal);
+					fila.children('#3').text(fecha);
 
 					//Añadir animación de confirmación de la modificación
 					$(fila).addClass('fondo-exito');
@@ -114,53 +113,51 @@ function agregarCargo(){
 					//Si ocurrió algún error
 					400: ()=>{
 						barraProgreso(false);
-						error.text('Hay un error en el nombre del cargo.');
+						error.text('Hay un error en el nombre del grado.');
 						__NOMBRE = false;
 						actualizarBoton();
 					},
 
 					500: ()=>{
 						barraProgreso(false);
-						error.text('Ocurrió un error y no se pudo registrar el cargo.');
+						error.text('Ocurrió un error y no se pudo registrar el grado.');
 					},
 
 					404: ()=>{
 						barraProgreso(false);
-						error.text('El cargo que intenta modificar no existe.');
+						error.text('El grado que intenta modificar no existe.');
 						__NOMBRE = false;
 						actualizarBoton();
 					}
 				}
 			});
 		} else {
-			//Si se va a crear un cargo nuevo
+			//Si se va a crear un grado nuevo
 			//Enviar solicitud tipo POST al servidor
-			$.post('/api/cargo', { nombre: nombre }).then((cargo)=>{
-				//Cargo agregado a la base de datos
-				let fila = crearFila(5);
-				let division = cargo.creacion.indexOf('T');
-				let fecha = parseDate(cargo.creacion.substr(0, division));
+			$.post('/api/grado', { nombre: nombre }).then((grado)=>{
+				//Grado agregado a la base de datos
+				let fila = crearFila(4);
+				let division = grado.creacion.indexOf('T');
+				let fecha = parseDate(grado.creacion.substr(0, division));
 				let lapiz = document.createElement('img');
 				let modalTrigger = document.createElement('a');
 				
 				//Creación de la fila con los datos recibidos del servidor
-				fila.id = cargo.ID;
-				$(fila).children('#1').text(cargo.nombre);
-				$(fila).children('#2').text(cargo.activo);
+				fila.id = grado.ID;
+				$(fila).children('#1').text(grado.nombre);
+				$(fila).children('#2').text(grado.personal);
 				$(fila).children('#2').addClass('center-align');
-				$(fila).children('#3').text(cargo.historico);
+				$(fila).children('#3').text(fecha);
 				$(fila).children('#3').addClass('center-align');
-				$(fila).children('#4').text(fecha);
-				$(fila).children('#4').addClass('center-align');
 				lapiz.src = "/ICONS/lapiz.png";
 				lapiz.className = "imagen-editar logo responsive-img";
-				modalTrigger.href = "#agregarCargo";
+				modalTrigger.href = "#agregarEstado";
 				modalTrigger.className = "modal-trigger";
 				$(modalTrigger).append(lapiz);
 				$(modalTrigger).click(edicion);
-				$(fila).children('#5').addClass('center-align');
+				$(fila).children('#4').addClass('center-align');
 
-				$(fila).children('#5').append(modalTrigger);
+				$(fila).children('#4').append(modalTrigger);
 
 				//Animación de confirmación agregando de primera en la tabla
 				abrir(tabla, fila, 'fondo-exito', true);
@@ -171,19 +168,19 @@ function agregarCargo(){
 				barraProgreso(false);
 				switch(err.status){
 					case 400: 
-						error.text('Hay un error en el nombre del cargo.');
+						error.text('Hay un error en el nombre del grado.');
 						__NOMBRE = false;
 						actualizarBoton();
 					break;
 
 					case 409: 
-						error.text('El cargo ya está registrado.');
+						error.text('El grado ya está registrado.');
 						__NOMBRE = false;
 						actualizarBoton();
 					break;
 
 					default:
-						error.text('Ocurrió un error y no se pudo registrar el cargo.');
+						error.text('Ocurrió un error y no se pudo registrar el grado.');
 					break;
 				}
 			});
@@ -194,51 +191,49 @@ function agregarCargo(){
 function edicion(evt){
 	//Si se selecciona una fila para modificarla
 	let fila = $(evt.target).parent().parent().parent();
-	let cargo = $(fila).children('#1').text();
+	let grado = $(fila).children('#1').text();
 	EDITANDO = 1;
 	__FILA = fila;
-	__CARGO = cargo;
+	__GRADO = grado;
 	//Actualizar los inputs del modal
-	$('#nuevoCargo').val(cargo);
-	$('#nuevoCargoLabel').addClass('active');
+	$('#nuevoGrado').val(grado);
+	$('#nuevoGradoLabel').addClass('active');
 	//Verificar que el cargo sea correcto
-	validarCargo();
+	validarGrado();
 }
 
 function cargarTabla(){
 	//Cargar elementos en la tabla al abrir la página por primera vez
-	let tabla = $('#tablaCargos');
-	//Solicitar todos los cargos al servidor
-	$.get('/api/cargos?fecha=1').then((cargos)=>{
-		for(let i = 0; i < cargos.length; i++){
-			//Crear las filas necesarias, una por cada cargo
-			let fila = crearFila(5);
-			let division = cargos[i].creacion.indexOf('T');
-			let fecha = parseDate(cargos[i].creacion.substr(0, division));
+	let tabla = $('#tablaGrados');
+	//Solicitar todos los grados al servidor
+	$.get('/api/grados').then((grados)=>{
+		for(let i = 0; i < grados.length; i++){
+			//Crear las filas necesarias
+			let fila = crearFila(4);
+			let division = grados[i].creacion.indexOf('T');
+			let fecha = parseDate(grados[i].creacion.substr(0, division));
 			let lapiz = document.createElement('img');
 			let modalTrigger = document.createElement('a');
 
 			//Añadir los datos relevantes en cada fila
-			fila.id = cargos[i].ID;
-			$(fila).children('#1').text(cargos[i].nombre);
-			$(fila).children('#2').text(cargos[i].activo);
+			fila.id = grados[i].ID;
+			$(fila).children('#1').text(grados[i].nombre);
+			$(fila).children('#2').text(grados[i].personal);
 			$(fila).children('#2').addClass('center-align');
-			$(fila).children('#3').text(cargos[i].historico);
+			$(fila).children('#3').text(fecha);
 			$(fila).children('#3').addClass('center-align');
-			$(fila).children('#4').text(fecha);
-			$(fila).children('#4').addClass('center-align');
 			//Añadir datos para la modificación de la fila
 			lapiz.src = "/ICONS/lapiz.png";
 			lapiz.className = "imagen-editar logo responsive-img";
-			modalTrigger.href = "#agregarCargo";
+			modalTrigger.href = "#agregarGrado";
 			modalTrigger.className = "modal-trigger";
 			$(modalTrigger).append(lapiz);
 			$(modalTrigger).click(edicion);
 
-			$(fila).children('#5').append(modalTrigger);
-			$(fila).children('#5').addClass('center-align');
+			$(fila).children('#4').append(modalTrigger);
+			$(fila).children('#4').addClass('center-align');
 			//Desplegar fila en la tabla
-			tabla.append(fila);
+			tabla.append(fila);	
 		}
 		//Actualizar el tamaño del menú lateral
 		calcularLateral();
@@ -247,10 +242,10 @@ function cargarTabla(){
 
 function limpiarModal(){
 	//Reestablecer los valores a los defaults al cerrar el modal
-	let nombre = $('#nuevoCargo');
-	let label = $('#nuevoCargoLabel');
+	let nombre = $('#nuevoGrado');
+	let label = $('#nuevoGradoLabel');
 	let error = $('#mensajeError');
-	let boton = $('#confirmarCargo');
+	let boton = $('#confirmarGrado');
 	barraProgreso(false);
 
 	nombre.val('');
@@ -261,5 +256,5 @@ function limpiarModal(){
 	EDITANDO = 0;
 	__NOMBRE = false;
 	__FILA = undefined;
-	__CARGO = undefined;
+	__GRADO = undefined;
 }

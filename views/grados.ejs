@@ -6,6 +6,7 @@
 	<meta http-equiv="X-UA-Compatible" content="ie=edge">
 	<link rel="stylesheet" href="/css/materialize.min.css">
 	<link rel="stylesheet" href="/CSS/estilos.css">
+	<link rel="stylesheet" href="/CSS/animate.css">
 	<link rel="shortcut icon" href="/ICONS/logo.png" type="image/x-icon">
 	<title>Administrar Grados | DCPCEO</title>
 </head>
@@ -86,11 +87,13 @@
 							<!-- Cuerpo del Modal -->
 							<div class="modal modal-fixed-footer" id="agregarGrado">
 								<div class="modal-content">
-									<h4 class="texto-primario">Crear un grado nuevo</h4><br>
+									<h4 id="tituloModal" class="texto-primario">Crear un grado nuevo</h4><br>
 									<div class="row">
 										<div class="input-field col s12 l10 offset-l1">
 											<input type="text" name="nuevoGrado" id="nuevoGrado">
-											<label for="nuevoGrado">Nombre del Grado</label>
+											<label id="nuevoGradoLabel" for="nuevoGrado">Nombre del Grado</label>
+										</div>
+										<div class="col s12 l10 offset-l1 texto-peligro" id="mensajeError">
 										</div>
 									</div>
 								</div>
@@ -136,7 +139,8 @@
 	<script src="/js/jquery.min.js"></script>
 	<script src="/js/materialize.min.js"></script>
 	<script src="/JS/Main.js"></script>
-	<script src="/JS/nuevoComponente.js"></script>
+	<script src="/JS/utilidades.js"></script>
 	<script src="/JS/animacionesTablas.js"></script>
+	<script src="/JS/adminGrados.js"></script>
 </body>
 </html>
