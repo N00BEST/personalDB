@@ -13,7 +13,7 @@ const database = new Sequelize('lhgTest', 'empleado', 'randomPass', {
 	logging: false
 });
 
-// ------ INCIO DEL MODELADO DE DATOS ------ //
+// - - - - - - INCIO DEL MODELADO DE DATOS - - - - - - //
 
 // GRADOS (ID, nombre)
 const Grados = database.define('grado', {
@@ -72,12 +72,61 @@ const Cargos = database.define('cargo', {
 	}
 });
 
+// COMPONENTE 
+const Componentes = database.define('componente', {
+	ID: {
+		type: Sequelize.INTEGER.UNSIGNED,
+		allowNull: false,
+		primaryKey: true,
+		autoIncrement: true
+	},
+	nombre: {
+		type: Sequelize.STRING(200),
+		unique: true
+	},
+	comandante: {
+		type: Sequelize.STRING(200)
+	}, 
+	gradoComandante: {
+		type: Sequelize.STRING(200)
+	},
+	fechaComandante: {
+		type: Sequelize.DATE
+	},
+	segundo: {
+		type: Sequelize.STRING(200)
+	}, 
+	gradoSegundo: {
+		type: Sequelize.STRING(200)
+	},
+	fechaSegundo: {
+		type: Sequelize.DATE
+	}
+});
+
+// JERARQUIA 
+const Jerarquias = database.define('jerarquia', {
+	ID: {
+		type: Sequelize.INTEGER.UNSIGNED,
+		allowNull: false,
+		primaryKey: true,
+		autoIncrement: true
+	},
+	mando: {
+		type: Sequelize.INTEGER.UNSIGNED,
+		allowNull: false
+	}
+});
 
 
 
+// - - - - - - CONFIGURACIÓN DE LAS RELACIONES - - - - - - //
+
+Componentes.belongsToMany(Grados, { through: Jerarquias });
+Grados.belongsToMany(Componentes, { through: Jerarquias });
 
 
-// SINCRONIZACIÓN DE LAS TABLAS 
+// - - - - - - SINCRONIZACIÓN DE LAS TABLAS - - - - - - //
 
 Grados.sync({force: false}).then(()=>{
 	console.log('[ ÉXITO ] Tabla Grados sincronizada con éxito');
@@ -103,12 +152,25 @@ Cargos.sync({force: false}).then(()=>{
 	console.log(`[ ERROR ] Tabla Cargos no se pudo sincronizar. ${err.message}`);
 });
 
+Componentes.sync({force: false}).then(()=>{
+	console.log('[ ÉXITO ] Tabla Componentes sincronizada con éxito');
+}).catch((err)=>{
+	console.log(`[ ERROR ] Tabla Componentes no se pudo sincronizar. ${err.message}`);
+});
+
+Jerarquias.sync({force: false}).then(()=>{
+	console.log('[ ÉXITO ] Tabla Jerarquías sincronizada con éxito');
+}).catch((err)=>{
+	console.log(`[ ERROR ] Tabla Jerarquías no se pudo sincronizar. ${err.message}`);
+});
 
 
 
+// - - - - - - EXPORTACIÓN DE LAS TABLAS - - - - - - //
 
-// EXPORTACIÓN DE LAS TABLAS
 module.exports.Grados = Grados;
 module.exports.Estados = Estados;
 module.exports.Clasificaciones = Clasificaciones;
 module.exports.Cargos = Cargos;
+module.exports.Componentes = Componentes;
+module.exports.Jerarquias = Jerarquias;

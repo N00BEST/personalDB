@@ -4,7 +4,7 @@ $(document).ready(()=>{
 		onOpenStart: desplegarTitulo
 	});
 	$('#confirmarClasificacion').click(agregarClasificacion);
-	$('#nuevoClasificacion').keyup(validarClasificacion);
+	$('#nuevaClasificacion').keyup(validarClasificacion);
 	cargarTabla();
 });
 
@@ -25,7 +25,7 @@ function desplegarTitulo() {
 }
 
 function validarClasificacion(evt){
-	let nombre = $('#nuevoClasificacion').val().trim();
+	let nombre = $('#nuevaClasificacion').val().trim();
 	let error = $('#mensajeError');
 	if(nombre.length > 0) {
 		$.get('/api/clasificacion?nombre=' + nombre).then((clasificacion)=>{
@@ -68,7 +68,7 @@ function agregarClasificacion(){
 	//Si el nombre es válido
 	if(__NOMBRE){
 		//Extraer datos generales a usar
-		let nombre = $('#nuevoClasificacion').val().trim();
+		let nombre = $('#nuevaClasificacion').val().trim();
 		let tabla = $('#tablaClasificaciones');
 		let modal = M.Modal.getInstance($('#agregarClasificacion'));
 		let error = $('#mensajeError');
@@ -196,8 +196,8 @@ function edicion(evt){
 	__FILA = fila;
 	__CLASIFICACION = clasificacion;
 	//Actualizar los inputs del modal
-	$('#nuevoClasificacion').val(clasificacion);
-	$('#nuevoClasificacionLabel').addClass('active');
+	$('#nuevaClasificacion').val(clasificacion);
+	$('#nuevaClasificacionLabel').addClass('active');
 	//Verificar que el cargo sea correcto
 	validarClasificacion();
 }
@@ -242,8 +242,8 @@ function cargarTabla(){
 
 function limpiarModal(){
 	//Reestablecer los valores a los defaults al cerrar el modal
-	let nombre = $('#nuevoClasificacion');
-	let label = $('#nuevoClasificacionLabel');
+	let nombre = $('#nuevaClasificacion');
+	let label = $('#nuevaClasificacionLabel');
 	let error = $('#mensajeError');
 	let boton = $('#confirmarClasificacion');
 	barraProgreso(false);

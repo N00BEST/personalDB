@@ -25,8 +25,7 @@ module.exports.postGrado = (req, res)=> {
 				let resultado = {
 					ID: arreglo[0].ID,
 					nombre: arreglo[0].nombre,
-					activo: 0,
-					historico: 0,
+					personal: 0,
 					creacion: arreglo[0].createdAt
 				}
 				res.statusCode = 201;
@@ -42,7 +41,7 @@ module.exports.postGrado = (req, res)=> {
 			res.sendStatus(500);
 		})
 	}
-};
+}
 
 module.exports.getGrados = (req, res)=>{
 	let fecha = req.query.fecha;
@@ -62,8 +61,7 @@ module.exports.getGrados = (req, res)=>{
 			let fila = {
 				ID: filas[i].ID,
 				nombre: filas[i].nombre, 
-				activo: 'No Implementado',
-				historico: 'No Implementado',
+				personal: 'No Implementado',
 				creacion: filas[i].createdAt
 			}
 			resultado.push(fila);
@@ -73,23 +71,23 @@ module.exports.getGrados = (req, res)=>{
 		console.log(`[ ERROR ] Ocurrió un error al intentar recuperar los grados. ${err.message} `);
 		res.sendStatus(500);
 	});
-};
+}
 
 module.exports.getGrado = (req, res)=>{
 	let nombre = req.query.nombre;
-	if(typeof nombre === 'undefined') {
+	let ID = req.query.ID;
+	if(typeof nombre === 'undefined' && typeof ID === 'undefined') {
 		res.sendStatus(400);
 	} else {
-		nombre = nombre.trim();
+		let where = ID ? { ID: ID.trim() } : { nombre: nombre.toLowerCase().trim() };
 		DB.Grados.findOne({
-			where: {
-				nombre: nombre.toLowerCase()
-			}
+			where: where
 		}).then((grado)=>{
 			if(grado){
 				let obj = {
 					ID: grado.ID,
 					nombre: grado.nombre,
+					personal: 'No Implementado',
 					creacion: grado.createdAt
 				}
 				res.send(obj);
@@ -101,12 +99,14 @@ module.exports.getGrado = (req, res)=>{
 			res.sendStatus(500);
 		});
 	}
-};
+}
 
 module.exports.putGrado = (req, res)=>{
-	let nombre = req.query.nombre;
-	let nuevo = req.query.nuevo;
-	if(typeof nombre === 'undefined' || typeof nuevo === 'undefined'){
+	let nombre = req.body.nombre;
+	let nuevo = req.body.nuevo;
+	let ID = req.body.ID;
+	if(typeof nombre === 'undefined' || typeof nuevo === 'undefined' || typeof ID === 'undefined'
+	|| isNaN(ID) || ID.indexOf('.') !== -1){
 		res.sendStatus(400);
 	} else {
 		nombre = nombre.trim();
@@ -120,7 +120,13 @@ module.exports.putGrado = (req, res)=>{
 				grado.update({
 					nombre: nuevo.toLowerCase()
 				}).then((_grado)=>{
-					res.sendStatus(200);
+					let resultado = {
+						ID: _grado.ID,
+						nombre: _grado.nombre,
+						personal: 'No Implementado',
+						creacion: _grado.createdAt
+					}
+					res.send(resultado);
 				}).catch((err)=>{
 					console.log(`[ ERROR ] Ocurrió un error al intentar modificar un grado. ${err.message} `);
 					res.sendStatus(500);
@@ -133,7 +139,7 @@ module.exports.putGrado = (req, res)=>{
 			res.sendStatus(500);
 		});
 	}
-};
+}
 
 // - - - - - - MANEJO DE ESTADOS - - - - - - //
 
@@ -160,8 +166,7 @@ module.exports.postEstado = (req, res)=> {
 				let resultado = {
 					ID: arreglo[0].ID,
 					nombre: arreglo[0].nombre,
-					activo: 0,
-					historico: 0,
+					personal: 0,
 					creacion: arreglo[0].createdAt
 				}
 				res.statusCode = 201;
@@ -177,7 +182,7 @@ module.exports.postEstado = (req, res)=> {
 			res.sendStatus(500);
 		})
 	}
-};
+}
 
 module.exports.getEstados = (req, res)=>{
 	let fecha = req.query.fecha;
@@ -197,6 +202,7 @@ module.exports.getEstados = (req, res)=>{
 			let fila = {
 				ID: filas[i].ID,
 				nombre: filas[i].nombre, 
+				personal: 'No Implementado',
 				creacion: filas[i].createdAt
 			}
 			resultado.push(fila);
@@ -206,23 +212,23 @@ module.exports.getEstados = (req, res)=>{
 		console.log(`[ ERROR ] Ocurrió un error al intentar recuperar los grados. ${err.message} `);
 		res.sendStatus(500);
 	});
-};
+}
 
 module.exports.getEstado = (req, res)=>{
 	let nombre = req.query.nombre;
-	if(typeof nombre === 'undefined') {
+	let ID = req.query.ID;
+	if(typeof nombre === 'undefined' && typeof ID === 'undefined') {
 		res.sendStatus(400);
 	} else {
-		nombre = nombre.trim();
+		let where = ID ? { ID: ID.trim() } : { nombre: nombre.toLowerCase().trim() };
 		DB.Estados.findOne({
-			where: {
-				nombre: nombre.toLowerCase()
-			}
+			where: where
 		}).then((estado)=>{
 			if(estado){
 				let obj = {
 					ID: estado.ID,
 					nombre: estado.nombre,
+					personal: 'No Implementado',
 					creacion: estado.createdAt
 				}
 				res.send(obj);
@@ -234,18 +240,21 @@ module.exports.getEstado = (req, res)=>{
 			res.sendStatus(500);
 		});
 	}
-};
+}
 
 module.exports.putEstado = (req, res)=>{
 	let nombre = req.body.nombre;
 	let nuevo = req.body.nuevo;
-	if(typeof nombre === 'undefined' || typeof nuevo === 'undefined'){
+	let ID = req.body.ID;
+	if(typeof nombre === 'undefined' || typeof nuevo === 'undefined' || typeof ID === 'undefined'
+	|| isNaN(ID) || ID.indexOf('.') !== -1){
 		res.sendStatus(400);
 	} else {
 		nombre = nombre.trim();
 		nuevo = nuevo.trim();
 		DB.Estados.findOne({
 			where: {
+				ID: ID,
 				nombre: nombre.toLowerCase()
 			}
 		}).then((estado)=>{
@@ -272,7 +281,7 @@ module.exports.putEstado = (req, res)=>{
 			res.sendStatus(500);
 		});
 	}
-};
+}
 
 // - - - - - - MANEJO DE CARGOS - - - - - - //
 
@@ -316,7 +325,7 @@ module.exports.postCargo = (req, res)=> {
 			res.sendStatus(500);
 		})
 	}
-};
+}
 
 module.exports.getCargos = (req, res)=>{
 	let fecha = req.query.fecha;
@@ -347,14 +356,15 @@ module.exports.getCargos = (req, res)=>{
 		console.log(`[ ERROR ] Ocurrió un error al intentar recuperar los cargos. ${err.message} `);
 		res.sendStatus(500);
 	});
-};
+}
 
 module.exports.getCargo = (req, res)=>{
 	let nombre = req.query.nombre;
-	if(typeof nombre === 'undefined') {
+	let ID = req.query.ID;
+	if(typeof nombre === 'undefined' && typeof ID === 'undefined') {
 		res.sendStatus(400);
 	} else {
-		nombre = nombre.trim();
+		let where = ID ? { ID: ID.trim() } : { nombre: nombre.toLowerCase().trim() };
 		DB.Cargos.findOne({
 			where: {
 				nombre: nombre.toLowerCase()
@@ -364,6 +374,8 @@ module.exports.getCargo = (req, res)=>{
 				let obj = {
 					ID: cargo.ID,
 					nombre: cargo.nombre,
+					activo: 'No Implementado',
+					historico: 'No Implementado',
 					creacion: cargo.createdAt
 				}
 				res.send(obj);
@@ -375,7 +387,7 @@ module.exports.getCargo = (req, res)=>{
 			res.sendStatus(500);
 		});
 	}
-};
+}
 
 module.exports.putCargo = (req, res)=>{
 	console.log('Nueva solicitud por aquí');
@@ -418,7 +430,7 @@ module.exports.putCargo = (req, res)=>{
 			res.sendStatus(500);
 		});
 	}
-};
+}
 
 // - - - - - - MANEJO DE CLASIFICACIONES - - - - - - //
 
@@ -445,8 +457,7 @@ module.exports.postClasificacion = (req, res)=> {
 				let resultado = {
 					ID: arreglo[0].ID,
 					nombre: arreglo[0].nombre,
-					activo: 0,
-					historico: 0,
+					personal: 0,
 					creacion: arreglo[0].createdAt
 				}
 				res.statusCode = 201;
@@ -462,7 +473,7 @@ module.exports.postClasificacion = (req, res)=> {
 			res.sendStatus(500);
 		})
 	}
-};
+}
 
 module.exports.getClasificaciones = (req, res)=>{
 	let fecha = req.query.fecha;
@@ -482,6 +493,7 @@ module.exports.getClasificaciones = (req, res)=>{
 			let fila = {
 				ID: filas[i].ID,
 				nombre: filas[i].nombre, 
+				personal: 'No Implementado',
 				creacion: filas[i].createdAt
 			}
 			resultado.push(fila);
@@ -491,23 +503,23 @@ module.exports.getClasificaciones = (req, res)=>{
 		console.log(`[ ERROR ] Ocurrió un error al intentar recuperar las clasificaciones. ${err.message} `);
 		res.sendStatus(500);
 	});
-};
+}
 
 module.exports.getClasificacion = (req, res)=>{
 	let nombre = req.query.nombre;
-	if(typeof nombre === 'undefined') {
+	let ID = req.query.ID;
+	if(typeof nombre === 'undefined' && typeof ID === 'undefined') {
 		res.sendStatus(400);
 	} else {
-		nombre = nombre.trim();
+		let where = ID ? { ID: ID.trim() } : { nombre: nombre.toLowerCase().trim() };
 		DB.Clasificaciones.findOne({
-			where: {
-				nombre: nombre.toLowerCase()
-			}
+			where: where
 		}).then((clasificacion)=>{
 			if(clasificacion){
 				let obj = {
 					ID: clasificacion.ID,
 					nombre: clasificacion.nombre,
+					personal: 'No Implementado',
 					creacion: clasificacion.createdAt
 				}
 				res.send(obj);
@@ -519,18 +531,21 @@ module.exports.getClasificacion = (req, res)=>{
 			res.sendStatus(500);
 		});
 	}
-};
+}
 
 module.exports.putClasificacion = (req, res)=>{
-	let nombre = req.query.nombre;
-	let nuevo = req.query.nuevo;
-	if(typeof nombre === 'undefined' || typeof nuevo === 'undefined'){
+	let nombre = req.body.nombre;
+	let nuevo = req.body.nuevo;
+	let ID = req.body.ID;
+	if(typeof nombre === 'undefined' || typeof nuevo === 'undefined' || typeof ID === 'undefined'
+		|| isNaN(ID) || ID.indexOf('.') !== -1){
 		res.sendStatus(400);
 	} else {
 		nombre = nombre.trim();
 		nuevo = nuevo.trim();
 		DB.Clasificaciones.findOne({
 			where: {
+				ID: ID,
 				nombre: nombre.toLowerCase()
 			}
 		}).then((clasificacion)=>{
@@ -538,7 +553,13 @@ module.exports.putClasificacion = (req, res)=>{
 				clasificacion.update({
 					nombre: nuevo.toLowerCase()
 				}).then((_clasificacion)=>{
-					res.sendStatus(200);
+					let resultado = {
+						ID: _clasificacion.ID,
+						nombre: _clasificacion.nombre,
+						personal: 'No Implementado',
+						creacion: _clasificacion.createdAt
+					}
+					res.send(resultado);
 				}).catch((err)=>{
 					console.log(`[ ERROR ] Ocurrió un error al intentar modificar una clasificación. ${err.message} `);
 					res.sendStatus(500);
@@ -551,4 +572,232 @@ module.exports.putClasificacion = (req, res)=>{
 			res.sendStatus(500);
 		});
 	}
-};
+}
+
+// - - - - - - MANEJO DE COMPONENTES - - - - - - //
+
+module.exports.postComponente = (req, res)=>{
+	let nombre = req.body.nombre;
+	let comandante = {
+		nombre: req.body.comandante ? req.body.comandante.trim() : '',
+		grado: req.body.gradoComandante ? req.body.gradoComandante.trim() : '',
+		fecha: req.body.fechaComandante ? req.body.fechaComandante.trim() : ''
+	};
+	let segundo = {
+		nombre: req.body.segundo,
+		grado: req.body.gradoSegundo,
+		fecha: req.body.fechaSegundo
+	};
+	let jerarquia = req.body.jerarquia ? req.body.jerarquia.split('#') : [];
+	if(typeof nombre === 'undefined' || nombre.length === 0) {
+		res.sendStatus(400);
+	} else {
+		//Validar los ID's de la jerarquia
+		//Si todos son válidos, guardar los ID's
+		//Registrar el componente y luego asociarlo a los ID's
+		let promesas = [];
+		let top = jerarquia.length;
+		for(let i = 0; i < top; i++){
+			let id = jerarquia.shift();
+			promesas.push(DB.Grados.findOne({
+				where: {
+					ID: id
+				}
+			}));
+		}
+
+		Promise.all(promesas).then((valores)=>{
+			if(valores.length === 0 || valores.indexOf(null) === -1) {
+				nombre = nombre.trim();
+				DB.Componentes.findOrCreate({
+					where: {
+						nombre: nombre
+					}, 
+					defaults: {
+						nombre: nombre,
+						comandante: comandante.nombre,
+						gradoComandante: comandante.grado,
+						fechaComandante: comandante.fecha,
+						segundo: segundo.nombre,
+						gradoSegundo: segundo.grado,
+						fechaSegundo: segundo.fecha
+					}
+				}).then((arreglo)=>{
+					if(arreglo[1]){
+						//Si fue creado
+						let resultado = {
+							ID: arreglo[0].ID,
+							nombre: arreglo[0].nombre,
+							comandante: {
+								nombre: arreglo[0].comandante,
+								grado: arreglo[0].gradoComandante,
+								fecha: arreglo[0].fechaComandante
+							},
+							segundo: {
+								nombre: arreglo[0].segundo,
+								grado: arreglo[0].gradoSegundo,
+								fecha: arreglo[0].fechaSegundo
+							},
+							grados: []
+						}
+						let tope = valores.length;
+						let componenteID = arreglo[0].ID;
+						for(let i = 0; i < tope; i++) {
+							let grado = valores.shift();
+							resultado.grados.push({
+								ID: grado.ID,
+								nombre: grado.nombre
+							});
+							DB.Jerarquias.create({
+								mando: i + 1,
+								componenteID: componenteID,
+								gradoID: grado.ID
+							}).then(()=>{}).catch((err)=>{
+								console.log(`[ ERROR ] Ocurrió un error al relacionar la jerarquia. ${err.message} `);
+							});
+						}
+						res.send(resultado);						
+					} else {
+						//Si fue encontrado
+						res.sendStatus(409);
+					}
+				}).catch((err)=>{
+					console.log(`[ ERROR ] Ocurrió un error al intentar crear un componente. ${err.message} `);
+					res.sendStatus(500);
+				});
+			} else {
+				res.sendStatus(400);
+			}
+		}).catch((err)=>{
+			console.log(`[ ERROR ] Ocurrió un error al consultar las jerarquías. ${err.message} `);
+			res.sendStatus(500);
+		});
+	}
+}
+
+module.exports.getComponentes = (req, res)=>{
+	DB.Componentes.findAll().then((componentes)=>{
+		let resultado = [];
+		let tope = componentes.length;
+		for(let i = 0; i < tope; i++) {
+			let componente = componentes.shift();
+			resultado.push({
+				ID: componente.ID,
+				nombre: componente.nombre,
+				creacion: componente.createdAt
+			});
+		}
+		res.send(resultado);
+	}).catch((err)=>{
+		console.log(`[ ERROR ] Ocurrió un error al consultar los componentes. ${err.message} `);
+		res.sendStatus(500);
+	})
+}
+
+module.exports.getComponente = (req, res)=>{
+	//Extraer posibles datos de interés
+	let nombre = req.query.nombre;
+	let ID = req.query.ID;
+	if(typeof nombre === 'undefined' && typeof ID === 'undefined') {
+		res.sendStatus(400);
+	} else {
+		//Si se proporciona ID, buscar por ID, de otra forma, buscar por nombre
+		let where = ID ? { ID: ID.trim() } : { nombre: nombre.toLowerCase().trim() };
+		//Buscar el elemento que coincida con la query
+		DB.Componentes.findOne({
+			where: where
+		}).then((componente)=>{
+			//Al finalizar la query
+			if(componente){
+				//Si se encuentra el componente
+				let obj = {
+					ID: componente.ID,
+					nombre: componente.nombre,
+					comandante: {
+						nombre: componente.comandante,
+						grado: componente.gradoComandante,
+						fecha: componente.fechaComandante
+					},
+					segundo: {
+						nombre: componente.segundo,
+						grado: componente.gradoSegundo,
+						fecha: componente.fechaSegundo
+					},
+					grados: [],
+					creacion: componente.createdAt
+				}
+				//Buscar los grados relacionados con ese componente ordenados por cadena de mando
+				DB.Jerarquias.findAll({
+					where: {
+						componenteID: componente.ID
+					},
+					order: [
+						['mando', 'ASC']
+					]
+				}).then((jerarquia)=>{
+					//Al finalizar la query
+					let promesas = [];
+					let tope = jerarquia.length;
+					for(let i = 0; i < tope; i++) {
+						let relacion = jerarquia.shift();
+						//Buscar en Grados todos los grados que están en la jerarquía
+						promesas.push(DB.Grados.findOne({
+							where: {
+								ID: relacion.gradoID
+							}
+						}));
+					}
+					//Esperar a que todas las querys de jerarquia se terminen
+					Promise.all(promesas).then((grados)=>{
+						let top = grados.length;
+						for(let i = 0; i < top; i++) {
+							let grado = grados.shift();
+							obj.grados.push({
+								ID: grado.ID,
+								nombre: grado.nombre
+							});
+						}
+						//Enviar resultado
+						res.send(obj);
+					}).catch((err)=>{
+						console.log(`[ ERROR ] Ocurrió un error al recuperar un componente. ${err.message} `);
+						res.sendStatus(500);
+					});
+				}).catch((err)=>{
+					console.log(`[ ERROR ] Ocurrió un error al recuperar la jerarquía. ${err.message} `);
+					res.sendStatus(500);
+				});
+			} else {
+				res.sendStatus(404);
+			}
+		}).catch((err)=>{
+			console.log(`[ ERROR ] Ocurrió un error al recuperar un componente. ${err.message} `);
+			res.sendStatus(500);
+		});
+	}
+}
+
+module.exports.putComponente = (req, res)=>{
+	let nombre = req.body.nombre;
+	let ID = req.body.ID;
+	let nuevo = req.body.nuevo;
+	let comandante = {
+		nombre: req.body.comandante,
+		grado: req.body.gradoComandante,
+		fecha: req.body.fechaComandante
+	}
+	let segundo = {
+		nombre: req.body.segundo,
+		grado: req.body.gradoSegundo,
+		fecha: req.body.fechaSegundo
+	}
+	if(typeof nombre === 'undefined' || typeof ID === 'undefined' || isNaN(ID) || ID.indexOf('.') !== -1
+		|| (typeof nuevo === 'undefined' && typeof comandante.nombre === 'undefined' && typeof comandante.grado === 'undefined'
+		&& typeof comandante.fecha === 'undefined' && typeof segundo.nombre === 'undefined' && typeof segundo.grado === 'undefined'
+		&& typeof segundo.fecha === 'undefined')){
+			res.sendStatus(400);
+	} else{
+		console.log('Mejor en el else');
+		res.sendStatus(200);
+	}
+}

@@ -36,6 +36,11 @@ app.post('/api/clasificacion', API.postClasificacion);
 app.get('/api/clasificacion', API.getClasificacion);
 app.put('/api/clasificacion', API.putClasificacion);
 
+app.get('/api/componentes', API.getComponentes);
+app.post('/api/componente', API.postComponente);
+app.get('/api/componente', API.getComponente);
+app.put('/api/componente', API.putComponente);
+
 // ------ FIN DE LAS RUTAS DE LA API ------ //
 
 app.get('/Administrar/Cargos', (req, res)=>{
@@ -103,8 +108,9 @@ app.get('/Unidad/:abreviacion', (req, res)=>{
 	res.render('detallesUnidad');
 });
 
-app.post('/test/:status', (req, res)=>{
-	res.sendStatus(req.params.status);
+app.put('/test', (req, res)=>{
+	console.log(req.body.data);
+	res.sendStatus(200);
 });
 
 app.listen(__PORT, (err)=>{
