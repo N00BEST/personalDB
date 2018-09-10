@@ -60,14 +60,18 @@ function cerrar(fila, valores) {
 
 function abrir(tabla, fila, fondo, slow) {
 	setTimeout(()=>{
-		tabla.prepend(fila);
+		if(tabla) {
+			tabla.prepend(fila);
+		}
+		$(fila).removeClass('animar slow');
 		$(fila).addClass(fondo);
 		calcularLateral();
 		setTimeout(()=>{
 			$(fila).addClass('animar ' + (slow ? 'slow' : ''));
 			$(fila).removeClass(fondo);
+			$(fila).removeClass('animar slow');
 		}, 500);
-	}, 500);
+	});
 }
 
 function crearFila(columnas) {

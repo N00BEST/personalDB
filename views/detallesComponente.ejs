@@ -7,7 +7,7 @@
 	<link rel="stylesheet" href="/css/materialize.min.css">
 	<link rel="stylesheet" href="/CSS/estilos.css">
 	<link rel="shortcut icon" href="/ICONS/logo.png" type="image/x-icon">
-	<title>Componente | DCPCEO</title>
+	<title><%= nombre %> | DCPCEO</title>
 </head>
 <body>
 	<header id="header" class="navbar">
@@ -63,7 +63,7 @@
 						<div class="col s12">
 							<!-- Título -->
 							<div class="col s12 pt0 mt0 pl0">
-								<h3 class="pb0 mb0 left-align texto-primario">Componente <small>Información general.</small></h3>
+								<h3 class="pb0 mb0 left-align texto-primario"><%= nombre %> <small>Información general.</small></h3>
 							</div>
 							<div class="migajas mt0 pt0">
 								<ul class="mt0 pt0">
@@ -71,7 +71,7 @@
 									<li class="flecha">&gt;</li>
 									<a href="/Componentes"><li>Componentes</li></a>
 									<li class="flecha">&gt;</li>
-									<li class="activa">Nombre</li>
+									<li class="activa"><%= nombre %></li>
 								</ul>
 							</div>
 						</div>
@@ -87,7 +87,7 @@
 							<!-- Personal Civil -->
 							<div class="col s12 mt0 pt0 justify-align detalles">
 								<h5 class="mt0 texto-primario">Personal Civil: </h5>
-								<a class="texto tabulado texto-primario">Total: </a><a class="texto texto-secundario antinegrita">30 personas</a><br><br>
+								<a class="texto tabulado texto-primario">Total: </a><a class="texto texto-secundario antinegrita">No implementado</a><br><br>
 								<a class="texto texto-primario">Detalles: </a>
 								<a class="boton-outline boton-confirmar btn-flat right">Administrar Clasificación</a><br><br>
 								<table class="resaltable">
@@ -95,58 +95,28 @@
 										<tr class="enfasis">
 											<th class="center-align" style="width: 70%;">Tipo</th>
 											<th class="divisor"></th>
-											<th class="center-align">Cantidad</th>
+											<th class="center-align">Personal</th>
 										</tr>
 									</thead>
-									<tbody>
-										<tr>
-											<td>Empleado</td>
-											<td class="divisor"></td>
-											<td class="center-align">2</td>
-										</tr>
-										<tr>
-											<td>Obrero</td>
-											<td class="divisor"></td>
-											<td class="center-align">13</td>
-										</tr>
-										<tr class="enfasis">
-											<td>Resumen</td>
-											<td class="divisor"></td>
-											<td class="center-align">15</td>
-										</tr>
+									<tbody id="tablaCivil">
 									</tbody>
 								</table><br>
 							</div>
 							<!-- Personal Militar -->
 							<div class="col s12 mt0 pt0 justify-align detalles" style="border-bottom: white !important;">
 								<h5 class="mt0 texto-primario">Personal Militar:</h5>
-								<a class="texto tabulado texto-primario">Total: </a><a class="texto texto-secundario antinegrita">30 personas</a><br><br>
+								<a class="texto tabulado texto-primario">Total: </a><a class="texto texto-secundario antinegrita">No implementado</a><br><br>
 								<a class="texto texto-primario">Grados: </a>
 								<a class="boton-outline boton-confirmar btn-flat right">Administrar Grados</a><br><br>
 								<table class="resaltable">
 									<thead>
 										<tr class="enfasis">
-											<th class="center-align" style="width: 70%;">Rango</th>
+											<th class="center-align" style="width: 70%;">Grado</th>
 											<th class="divisor"></th>
-											<th class="center-align">Cantidad</th>
+											<th class="center-align">Personal</th>
 										</tr>
 									</thead>
-									<tbody>
-										<tr>
-											<td>Alferez de Navío</td>
-											<td class="divisor"></td>
-											<td class="center-align">2</td>
-										</tr>
-										<tr>
-											<td>Capitán de Corbeta</td>
-											<td class="divisor"></td>
-											<td class="center-align">13</td>
-										</tr>
-										<tr class="enfasis">
-											<td>Resumen</td>
-											<td class="divisor"></td>
-											<td class="center-align">15</td>
-										</tr>
+									<tbody id="tablaMilitar">
 									</tbody>
 								</table><br>
 							</div>
@@ -156,18 +126,18 @@
 							<!-- Comandante de la unidad -->
 							<div class="col s12 mt0 pt0 justify-align detalles">
 								<h5 class="mt0 texto-primario">Comandante:</h5>
-								<a class="texto texto-primario">Nombre: </a><a href="#" class="texto texto-secundario antinegrita">Fulanito Perengano</a><br>
-								<a class="texto texto-primario">Grado: </a><a class="texto texto-secundario antinegrita">Capitán de Navío</a><br>
-								<a class="texto texto-primario">Fecha de Toma del Cargo: </a><a class="texto texto-secundario antinegrita">15 Oct 1970</a><br>
-								<a class="texto texto-primario">Tiempo en el Cargo: </a><a class="texto texto-secundario antinegrita">49 años, 17 días.</a><br>
+								<a class="texto texto-primario">Nombre: </a><a href="#" class="texto texto-secundario antinegrita"><%= comandante.nombre || 'No registrado.' %></a><br>
+								<a class="texto texto-primario">Grado: </a><a class="texto texto-secundario antinegrita"><%= comandante.grado || 'No registrado.' %></a><br>
+								<a class="texto texto-primario">Fecha de Toma del Cargo: </a><a class="texto texto-secundario antinegrita"><%= comandante.fecha || 'No registrado.' %></a><br>
+								<a class="texto texto-primario">Tiempo en el Cargo: </a><a class="texto texto-secundario antinegrita">No implementado</a><br>
 							</div>
 							<!-- Subcomandante de la unidad -->
 							<div class="col s12 mt0 pt0 justify-align detalles" style="border-bottom: white !important;">
 								<h5 class="mt0 texto-primario">Segundo Comandante:</h5>
-								<a class="texto texto-primario">Nombre: </a><a href="#" class="texto texto-secundario antinegrita">Fulanito Perengano</a><br>
-								<a class="texto texto-primario">Grado: </a><a class="texto texto-secundario antinegrita">Capitán de Navío</a><br>
-								<a class="texto texto-primario">Fecha de Toma del Cargo: </a><a class="texto texto-secundario antinegrita">15 Oct 1970</a><br>
-								<a class="texto texto-primario">Tiempo en el Cargo: </a><a class="texto texto-secundario antinegrita">49 años, 17 días.</a><br>
+								<a class="texto texto-primario">Nombre: </a><a href="#" class="texto texto-secundario antinegrita"><%= segundo.nombre || 'No registrado.' %></a><br>
+								<a class="texto texto-primario">Grado: </a><a class="texto texto-secundario antinegrita"><%= segundo.grado || 'No registrado.' %></a><br>
+								<a class="texto texto-primario">Fecha de Toma del Cargo: </a><a class="texto texto-secundario antinegrita"><%= segundo.fecha || 'No registrado.' %></a><br>
+								<a class="texto texto-primario">Tiempo en el Cargo: </a><a class="texto texto-secundario antinegrita">No implementado</a><br>
 							</div>
 						</div>
 					</div>
@@ -182,40 +152,10 @@
 										<th class="divisor"></th>
 										<th class="center-align" colspan="7">Personal</th>
 									</tr>
-									<tr class="enfasis">
-										<th class="divisor"></th>
-										<th class="center-align">Activo</th>
-										<th class="divisor"></th>
-										<th class="center-align">Permiso</th>
-										<th class="divisor"></th>
-										<th class="center-align">Reposo</th>
-										<th class="divisor"></th>
-										<th class="center-align">Total</th>
+									<tr id="filaEstados" class="enfasis">
 									</tr>
 								</thead>
-								<tbody>
-									<tr>
-										<td>REDI Los Llanos</td>
-										<td class="divisor"></td>
-										<td class="center-align">20</td>
-										<td class="divisor"></td>
-										<td class="center-align">5</td>
-										<td class="divisor"></td>
-										<td class="center-align">2</td>
-										<td class="divisor"></td>
-										<td class="center-align">27</td>
-									</tr>
-									<tr class="enfasis">
-										<td>Resumen</td>
-										<td class="divisor"></td>
-										<td class="center-align">20</td>
-										<td class="divisor"></td>
-										<td class="center-align">5</td>
-										<td class="divisor"></td>
-										<td class="center-align">2</td>
-										<td class="divisor"></td>
-										<td class="center-align">27</td>
-									</tr>
+								<tbody id="tablaUnidades">
 								</tbody>
 							</table>
 						</div>

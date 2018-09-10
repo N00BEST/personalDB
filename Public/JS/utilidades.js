@@ -1,58 +1,12 @@
+var __MESES = [ 'Ene', 'Feb', 'Mar', 'May', 'Abr', 'Jun', 'Jul', 'Ago', 'Sep', 'Oct', 'Nov', 'Dic' ];
+
 function parseDate(fecha) {
 	if(typeof fecha === 'undefined'){
 		throw new Error('Fecha es undefined');
 	} else {
 		let arreglo = fecha.split('-');
 		let resultado = arreglo[2] + " "; 
-		switch(arreglo[1]){
-			case '01': 
-				resultado += 'Ene ';
-			break;
-
-			case '02': 
-				resultado += 'Feb ';
-			break;
-
-			case '03': 
-				resultado += 'Mar ';
-			break;
-
-			case '04': 
-				resultado += 'Abr ';
-			break;
-
-			case '05': 
-				resultado += 'May ';
-			break;
-
-			case '06': 
-				resultado += 'Jun ';
-			break;
-
-			case '07': 
-				resultado += 'Jul ';
-			break;
-
-			case '08': 
-				resultado += 'Ago ';
-			break;
-
-			case '09': 
-				resultado += 'Sep ';
-			break;
-
-			case '10': 
-				resultado += 'Oct ';
-			break;
-
-			case '11': 
-				resultado += 'Nov ';
-			break;
-
-			case '12': 
-				resultado += 'Dic ';
-			break;
-		}
+		resultado += __MESES[parseInt(arreglo[1] - 1)] + ' ';
 
 		resultado += arreglo[0];
 
@@ -76,5 +30,32 @@ function barraProgreso(activar){
 		$(progreso).append(indeterminado);
 		//Se despliega la barra
 		barra.append(progreso);
+	}
+}
+
+function buscar(arreglo, ID){
+	let obj = undefined;
+	for(let i = 0; i < arreglo.length; i++){
+		if(arreglo[i].ID == ID){
+			obj = arreglo[i];
+			break;
+		}
+	}
+	return obj;
+}
+
+function StringFecha(fecha){
+	if(typeof fecha === 'undefined'){ 
+		throw new Error('Fecha es undefined');
+	} else {
+		if(fecha.length === 0) {
+			return undefined;
+		}
+		let arreglo = fecha.split(' ');
+		let resultado = arreglo[2] + '-';
+		let mes = (__MESES.indexOf(arreglo[1]) + 1).toString();
+		mes = mes.length === 1 ? '0' + mes : mes;
+		resultado += mes + '-' + arreglo[0];
+		return resultado;
 	}
 }

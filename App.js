@@ -14,7 +14,7 @@ app.use(express.static(__dirname + '/Public/'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: false}));
 
-// ------ RUTAS DE LA API ------ //
+// - - - - - - RUTAS DE LA API - - - - - - //
 
 app.get('/api/grados', API.getGrados);
 app.post('/api/grado', API.postGrado);
@@ -41,7 +41,13 @@ app.post('/api/componente', API.postComponente);
 app.get('/api/componente', API.getComponente);
 app.put('/api/componente', API.putComponente);
 
-// ------ FIN DE LAS RUTAS DE LA API ------ //
+// - - - - - - FIN DE LAS RUTAS DE LA API - - - - - - //
+
+// - - - - - - RUTAS CON VISTAS DE LA APP - - - - - - //
+
+app.get('/Componente/:ID', Controller.detalleUnidad);
+
+// - - - - - - FIN DE LAS RUTAS DE LA APP - - - - - - //
 
 app.get('/Administrar/Cargos', (req, res)=>{
 	console.log(`[ Nueva Conexión ] Hacia: '/Administrar/Cargos' Desde: '${req.connection.remoteAddress}'`);
@@ -61,11 +67,6 @@ app.get('/Administrar/Estados', (req, res)=>{
 app.get('/Administrar/Grados', (req, res)=>{
 	console.log(`[ Nueva Conexión ] Hacia: '/Administrar/Grados' Desde: '${req.connection.remoteAddress}'`);
 	res.render('grados');
-});
-
-app.get('/Componente/:nombre', (req, res)=>{
-	console.log(`[ Nueva Conexión ] Hacia: '/Componente/${req.params.nombre}' Desde: '${req.connection.remoteAddress}'`);
-	res.render('detallesComponente');
 });
 
 app.get('/Personal', (req, res)=>{
@@ -108,9 +109,8 @@ app.get('/Unidad/:abreviacion', (req, res)=>{
 	res.render('detallesUnidad');
 });
 
-app.put('/test', (req, res)=>{
-	console.log(req.body.data);
-	res.sendStatus(200);
+app.get('/test', (req, res)=>{
+	res.render('detallesComponente');
 });
 
 app.listen(__PORT, (err)=>{

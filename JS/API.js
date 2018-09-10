@@ -617,10 +617,10 @@ module.exports.postComponente = (req, res)=>{
 						nombre: nombre,
 						comandante: comandante.nombre,
 						gradoComandante: comandante.grado,
-						fechaComandante: comandante.fecha,
+						fechaComandante: comandante.fecha || null,
 						segundo: segundo.nombre,
 						gradoSegundo: segundo.grado,
-						fechaSegundo: segundo.fecha
+						fechaSegundo: segundo.fecha || null
 					}
 				}).then((arreglo)=>{
 					if(arreglo[1]){

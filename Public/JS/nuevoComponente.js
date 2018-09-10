@@ -8,12 +8,17 @@ $(document).ready(()=>{
 	$('#jerarquia').change(verificarJerarquia);
 	$('#jerarquia').keyup(verificarJerarquia);
 	$('#vaciarTabla').click(vaciarTabla);
+	$('#submit').click(submit);
+	$('#nombre').keyup(validarNombre);
 });
 
 var EDITANDO = false;
 var __GRADOS = false;
 var __JERARQUIA = false;
-var __FILA;
+var __FILA = undefined;
+var __NOMBRE = false;
+
+var __GRADOSARRAY;
 
 function LimpiarCampos(evt) {
 	$('#grados').val('');
@@ -36,7 +41,27 @@ function actualizarBoton() {
 }
 
 function iniciarJerarquia() {
+	
 	if(!EDITANDO){
+		$.get('/api/grados').then((grados)=>{
+			$('#grados').empty();
+			let seleccionar = document.createElement('option');
+			seleccionar.innerText="Seleccionar...";
+			$(seleccionar).attr('disabled', 'disabled');
+			$(seleccionar).attr('selected', 'selected');
+			$('#grados').append(seleccionar);
+			__GRADOSARRAY = grados;
+			for(let i = 0; i < grados.length; i++){
+				let grado = grados[i];
+				let opt = document.createElement('option');
+				opt.value = grado.ID;
+				opt.innerText = grado.nombre;
+				$('#grados').append(opt);
+			}
+			$('#grados').formSelect();
+		}).catch((err)=>{
+	
+		})
 		let tabla = $('#tablaGrados');
 		$('#jerarquia').empty();
 		let seleccionar = document.createElement('option');
@@ -83,7 +108,7 @@ function vaciarTabla(evt)  {
 function edicion(evt) {
 	let padre = $(evt.target).parent().parent();
 	let fila = $(padre).parent();
-	let grado = $(fila).children('#grado').text();
+	let grado = $(fila).attr('name');
 	let jerarquia = $(fila).children('#orden').text();
 	console.log('Jerarquia: ' + jerarquia);
 	$('#grados').val(grado);
@@ -112,13 +137,12 @@ function eliminar(evt) {
 function agregar(evt) {
 	verificarGrado();
 	verificarJerarquia();
+
 	if(__JERARQUIA && __GRADOS){
+		let tabla = $('#tablaGrados');
 		if(!EDITANDO){
-			let grado = $('#grados').val();
+			let grado = buscar(__GRADOSARRAY, $('#grados').val());
 			let jerarquia = $('#jerarquia').val();
-
-			let tabla = $('#tablaGrados');
-
 			let tr = document.createElement('tr');
 			let _grado = document.createElement('td');
 			let divisor = document.createElement('td');
@@ -131,10 +155,11 @@ function agregar(evt) {
 			let modalTrigger = document.createElement('a');
 
 			tr.id = jerarquia;
+			$(tr).attr('name', grado.ID);
 			_grado.id = 'grado';
 			_jerarquia.id = 'orden';
 
-			_grado.innerText = grado;
+			_grado.innerText = grado.nombre;
 			divisor.className = "divisor";
 			divisor1.className = "divisor";
 			_jerarquia.innerText = jerarquia;
@@ -167,15 +192,35 @@ function agregar(evt) {
 					tabla.children('#' + (parseInt(jerarquia) - 1)).after(tr);
 				}
 			}
+			
+			abrir(undefined, tr, 'fondo-exito', true);
 
 			actualizarTabla().then(()=>{
 				calcularLateral();
 			});
 		} else {
-			let grado = $('#grados').val();
+			let grado = buscar(__GRADOSARRAY, $('#grados').val());
 			let jerarquia = $('#jerarquia').val();
-			$(__FILA).children('#grado').text(grado);
+			$(__FILA).children('#grado').text(grado.nombre);
 			$(__FILA).children('#orden').text(jerarquia);
+			$(__FILA).attr('name', grado.ID);
+			if(tabla.children().length === 0) {
+				tabla.append(__FILA);
+			} else {
+				if(parseInt(jerarquia) === 1) {
+					tabla.prepend(__FILA);
+				} else if(parseInt(jerarquia) === tabla.children().length + 1) {
+					tabla.append(__FILA);
+				} else {
+					tabla.children('#' + (parseInt(jerarquia) - 1)).after(__FILA);
+				}
+			}
+
+			abrir(undefined, __FILA, 'fondo-exito', true);
+
+			actualizarTabla().then(()=>{
+				calcularLateral();
+			});
 		}
 	}
 }
@@ -191,4 +236,90 @@ function actualizarTabla(){
 		}
 		resolve();
 	});
+}
+
+function submit(){
+	validarNombre();
+	if(__NOMBRE){
+		let obj = {
+			nombre: $('#nombre').val().trim(),
+			jerarquia: '',
+			comandante: $('#nombreComandante').val().trim(),
+			gradoComandante: $('#gradoComandante').val().trim(),
+			fechaComandante: StringFecha($('#tomaComandante').val().trim()),
+			segundo: $('#nombreSegundo').val().trim(),
+			gradoSegundo: $('#gradoSegundo').val().trim(),
+			fechaSegundo: StringFecha($('#tomaSegundo').val().trim()),
+		}
+		let grados = $('#tablaGrados').children();
+
+		for(let i = 0; i < grados.length; i++) {
+			obj.jerarquia += $(grados[i]).attr('name') + '#';
+		}
+		if(obj.jerarquia.length > 0) {
+			obj.jerarquia = obj.jerarquia.substr(0, obj.jerarquia.length - 1);
+		}
+		$.post('/api/componente', obj).then((componente)=>{
+			M.toast({
+				html: '¡Se creó el componente "' + componente.nombre + '" éxitosamente!',
+				classes: 'fondo-exito'
+			});
+			$('#nombre').val('');
+			$('#nombreLabel').removeClass('active');
+			vaciarTabla();
+			$('#nombreComandante').val('');
+			$('#comandanteLabel').removeClass('active');
+			$('#gradoComandante').val('');
+			$('#gradoComandanteLabel').removeClass('active');
+			$('#tomaComandante').val('');
+			$('#nombreSegundo').val('');
+			$('#segundoLabel').removeClass('active');
+			$('#gradoSegundo').val('');
+			$('#gradoSegundoLabel').removeClass('active');
+			$('#tomaSegundo').val('');
+			calcularLateral();
+		}).catch((err)=>{
+			console.log(err);
+			let msg = "";
+			switch(err.status){
+				case 400: 
+					msg += 'Hay errores en el formulario.<br>Por favor corríjalos antes de continuar.';
+				break;
+
+				case 409: 
+					msg += 'No se puede registrar el componente.<br>Ya hay un componente registrado con ese nombre';
+				break;
+
+				default:
+					msg += 'Por favor inténtelo de nuevo más tarde.'
+				break;
+			}
+			M.toast({
+				html: msg,
+				classes: 'fondo-peligro'
+			});
+		});
+	} else {
+		M.toast({
+			html: 'Hay errores en el nombre del componente.<br /> Corríjalos antes de continuar',
+			classes: 'fondo-peligro'
+		});
+	}
+	$(document).scrollTop(0);
+}
+
+function validarNombre(){
+	let nombre = $('#nombre').val().trim();
+	if(nombre.length === 0) {
+		$('#errorNombre').text('El nombre no puede estar vacío.');
+		__NOMBRE = false;
+	} else {
+		$.get('/api/componente?nombre=' + nombre).then((resultado)=>{
+			$('#errorNombre').text('Ya hay un componente registrado con ese nombre.');
+			__NOMBRE = false;
+		}).catch((err)=>{
+			$('#errorNombre').text('');
+			__NOMBRE = true;
+		});
+	}
 }
